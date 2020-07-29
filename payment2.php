@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Payment</title>
+        <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <!-- Bulma Version 0.7.1-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/booking.css">
+        <link rel="stylesheet" href="css/datepicker.css">
+    
+        <script src="https://js.stripe.com/v3/"></script>
+    </head>
+<body>
+            <!--MENÚ-->
+
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                  <a class="navbar-item" href="index.php">
+                    <h1 class="title is-5 uppercase">logo</h1>
+                  </a>
+              
+                  <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
+                </div>
+              
+                <div id="navbarBasicExample" class="navbar-menu">
+                  <div class="navbar-start">
+                  </div>
+              
+                  <div class="navbar-end uppercase">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                          Language
+                        </a>
+                
+                        <div class="navbar-dropdown">
+                          <a class="navbar-item">
+                            Español
+                          </a>
+                          <a class="navbar-item">
+                            English
+                          </a>
+                          <a class="navbar-item">
+                            Deutsch
+                          </a>
+                          <a class="navbar-item">
+                            Français
+                          </a>
+                        </div>
+                    </div>
+                    <a href="nosotros.html" class="navbar-item">
+                       Nosotros
+                    </a>
+                    <a href="contacto.html" class="navbar-item">
+                        Contacto
+                    </a>
+                    <a href="faq.html" class="navbar-item">
+                        FAQs
+                    </a>
+                    <a href="booking.php" class="navbar-item">
+                        Booking
+                    </a>
+                  </div>
+                </div>
+              </nav>
+
+        <div class="spacer"></div>
+        
+        <div class="container">
+          <h1 class="has-text-cenetred title is-1">Pago de reservación</h1>
+          <div class="columns">
+            <div class="column">
+
+              <div class="columns">
+                <div class="column">
+                 <div class="field">
+                   <label class="label">Origen</label>
+                   <div class="control">
+                     <div class="select">
+                       <select>
+                         <option>Seleccionar ubicación</option>
+                         <option>With options</option>
+                       </select>
+                     </div>
+                   </div>
+                 </div>
+                </div>
+                <div class="column">                          
+                 <div class="field">
+                 <label class="label">Destino</label>
+                 <div class="control">
+                   <div class="select">
+                     <select>
+                       <option>Seleccionar ubicación</option>
+                       <option>With options</option>
+                     </select>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           <div class="field">
+            <label class="label">Fecha</label>
+            <div class="control has-icons-left">
+              <input type="text" id="datepicker" class="input datepicker-input-style" onchange="console.log(d.getDate())" autocomplete="off" placeholder="Fecha de traslado">
+              <span class="icon is-small is-left">
+                <i class="form-icons fa fa-calendar"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Horario</label>
+              <div class="control">
+                <div class="select">
+                  <select>
+                    <option>Selecciona el horario deseado</option>
+                    <option>With options</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="field">
+              <label class="label">Precio de traslado</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Precio">
+              </div>
+            </div>  
+            
+            <div class="field">
+              <label class="label">Precio de reserva</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Precio">
+              </div>
+            </div>  
+
+            <div class="field">
+              <label class="label">Pago pendiente (presencial)</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Precio">
+              </div>
+            </div>
+
+            </div>
+
+            
+            <div class="column">
+              <form action="./charge.php" method="post" id="payment-form">
+
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                      <input class="input" type="text" name="first_name" placeholder="e.g Alex Smith">
+                    </div>
+                  </div>
+    
+                  <div class="field">
+                    <label class="label">Apellidos</label>
+                    <div class="control">
+                      <input class="input" type="text" name="last_name" placeholder="e.g Alex Smith">
+                    </div>
+                  </div>
+                  
+                  <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                      <input class="input" type="email" name="client_email" placeholder="e.g. alexsmith@gmail.com">
+                    </div>
+                  </div>
+    
+                <div class="form-row">
+                  <label for="card-element">
+                    Credit or debit card
+                  </label>
+                  <div id="card-element">
+                    <!-- A Stripe Element will be inserted here. -->
+                  </div>
+              
+                  <!-- Used to display Element errors. -->
+                  <div id="card-errors" role="alert"></div>
+                </div>
+                <br />
+                <button class="button is-link">Submit Payment</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="spacer"></div>
+
+        <!--AREA DE FOOTER-->
+
+        <footer class="footer">
+            <div class="container">
+                <h1 class="title is-3 has-text-centered">Logo</h1>
+                <div class="small-spacer"></div>
+            </div>
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-3 is-offset-2">
+                        <h2><strong>Compañía</strong></h2>
+                        <ul>
+                            <li><a href="#">Nosotros</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="column is-3">
+                        <h2><strong>Legal</strong></h2>
+                        <ul>
+                            <li><a href="#">Términos y condiciones</a></li>
+                            <li><a href="#">Politica de privacidad</a></li>
+                            <li><a href="#">Información legal</a></li>
+                        </ul>
+                    </div>
+                    <div class="column is-4">
+                        <h2><strong>Nuestra plataforma</strong></h2>
+                        <ul>
+                            <li><a href="#">¿Cómo funciona?</a></li>
+                            <li><a href="#">Ayuda</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content has-text-centered">
+                    <ul class="footer-social-media">
+                        <li>
+                            <a class="icon" href="https://github.com/dansup/bulma-templates">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="icon" href="https://github.com/dansup/bulma-templates">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="icon" href="https://github.com/dansup/bulma-templates">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+      
+    <!-- Datepicker initialization -->
+    <script>
+        const d = new Datepicker(document.getElementById("datepicker"));
+            d.config({
+            firstdate: new Date(2019, 0, 9),
+            lastdate: new Date(2022, 12, 31),
+            format: d => {return(months_short[d.getMonth()] + " " + d.getDate())}
+        });
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/client.js"></script>
+    <script src="js/bulma.js"></script>
+
+</body>
+</html>

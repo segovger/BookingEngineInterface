@@ -1,0 +1,306 @@
+/*HELPERS*/
+
+.spacer{
+    height: 100px;
+    width: 100%;
+}
+
+.small-spacer{
+    height: 50px;
+    width: 100%;
+}
+
+.alinging-center{
+    text-align: center;
+}
+
+.red-link{
+    color: #C7555A;
+}
+
+.form-validator{
+    display: none !important;
+}
+
+.pt{
+    padding-top: 20px;
+}
+
+.height500{
+    height: 500px;
+}
+
+.height600{
+    height: 600px;
+}
+
+.uppercase{
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+@media screen and (max-width: 760px){
+    .desktop-only{
+        display: none;;
+    }
+}
+
+
+/*OVERRIDES*/
+
+.navbar-item img {
+    max-height: none !important;
+}
+
+img{
+    border-radius: 10px;
+}
+
+.button{
+    /*border-radius: 0 !important;*/
+    padding-right: 1.25em;
+    padding-left: 1.25em;
+    padding-top: 1.25em;
+    padding-bottom: 1.25em;
+}
+
+.button.is-medium{
+    border-radius: 0;
+}
+
+
+.home-select {
+    width: 100%;
+    background: transparent;
+}
+
+.home-cal{
+    border-color: none !important;
+}
+
+.home-select select {
+    border-color: transparent !important;
+}
+
+.control.has-icons-left .input, .control.has-icons-left .select select {
+    padding-left: 2.25em;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: transparent;
+    right: 1.125em;
+    z-index: 4;
+}
+
+/*.home-select.is-hovered{
+    padding-right: 10em;
+}
+
+.home-select select.is-hovered, .select select:hover {
+    padding-right: 10em;
+}*/
+
+.popular-trips-table.columns{
+    margin-right: 0;
+}
+
+
+.panel-heading {
+    background-color: #ffffff;
+    border-radius: 6px 6px 0 0;
+    color: #363636;
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 1.25;
+    padding: .75em 1em;
+}
+
+.panel{
+    border-radius: 6px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+    font-size: 1rem;
+}
+
+.panel-block {
+    align-items: center;
+    color: #363636;
+    display: flex;
+    justify-content: flex-start;
+    padding: .5em .75em;
+}
+
+.panel-block:first-child, .panel-heading:first-child, .panel-tabs:first-child {
+    border-top: none;
+}
+
+.panel-block, .panel-heading, .panel-tabs {
+    border-bottom: none; 
+    border-left: none; 
+    border-right: none;
+}
+
+.panel-block:last-child {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+/*
+.input{
+    border-color: transparent;
+    box-shadow: none;
+}
+*/
+
+footer a{
+    color: black;
+}
+
+@media screen and (max-width: 760px){
+    .column{
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+    .control{
+        display: inline-block;
+    }
+}
+
+
+/*STYLES*/
+
+.home-card{
+    box-shadow: none;
+}
+
+.home-hero-section{
+    background-image: url('../img/2.jpg');
+    background-size: cover;
+    height: 600px;
+}
+
+.overlay{
+    height: 600px;
+    position: absolute;
+    background: white;
+    opacity: 0.45;
+    width: 100%;
+}
+
+.btn-red{
+    background-color: #C7555A;
+    color: white;
+    border: none;
+}
+
+.btn-green{
+    background-color: #399F9D;
+    color: white;
+    border: none;
+}
+
+.home-card:hover{
+    box-shadow: 0 6px 11px rgba(10,10,10,.1), 0 0 0 0px rgba(10,10,10,.1);
+    cursor: pointer;
+}
+
+.home-cards.title{
+    margin-bottom: 80px;
+}
+
+.home-cards a{
+    color: #C7555A;
+}
+
+.options-select{
+    border: 1px solid black !important;
+}
+
+.form-icons{
+    color: black;
+}
+
+.icon-container{
+    display: inline-block;
+}
+.icon-container img{
+    text-align: center;
+}
+
+.minivan-icon{
+    width: 32px;
+    height: auto;
+}
+
+.reserva-icon{
+    width: 32px;
+    height: auto;
+    cursor: pointer;
+}
+
+.faq-icon{
+    width: 32px;
+    height: auto;
+}
+
+
+.registro-btn{
+    font-size: 0.9em;
+    border-radius: 0;
+}
+
+.hero-form input{
+    border-radius: 0;
+}
+
+.contact-img{
+    background-image: url('../img/markus-winkler-3vlGNkDep4E-unsplash.jpg');
+    background-size: cover;
+}
+
+.footer-social-media li{
+    display: inline-block;
+    padding: 10px;
+}
+
+@media screen and (max-width: 760px){
+    .home-card{
+        padding: 30px;
+    }
+
+    .home-hero-section{
+        background-image: url('../img/2-mobile.jpg');
+    }
+    
+    .column{
+        text-align: center;
+    }
+
+    p{
+        text-align: center;
+    }
+
+    .buttons{
+        display: inline-block;
+    }
+
+    .content ul {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .padding-mobile{
+        padding: 10px;
+    }
+
+    footer{
+        text-align: center;
+    }
+}
+
+
+
+
+

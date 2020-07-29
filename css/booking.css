@@ -1,0 +1,7 @@
+/*OVERRIDES*/
+
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: transparent !important;
+    right: 1.125em;
+    z-index: 4;
+}
