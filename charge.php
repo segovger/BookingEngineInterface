@@ -138,14 +138,14 @@ $body = str_replace('$detallesAdicionales', $detalles_adicionales, $body);
 $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
-$mail->Username = "gsaobs@gmail.com";
-$mail->Password = 'niagaraenbici';
+$mail->Username = "email";
+$mail->Password = 'pss';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
 
 //Email Settings
 $mail->isHTML(true);
-$mail->setFrom("gsaobs@gmail.com");
+$mail->setFrom("email");
 $mail->addAddress($email, $first_name);
 $mail->Subject = $subject;
 $mail->Body = $body;
@@ -201,15 +201,15 @@ $body2 = str_replace('$detallesAdicionales', $detalles_adicionales, $body2);
 $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
-$mail->Username = "gsaobs@gmail.com";
-$mail->Password = 'niagaraenbici';
+$mail->Username = "email";
+$mail->Password = 'pss';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
     
 //Email Settings
 $mail->isHTML(true);
-$mail->setFrom("gsaobs@gmail.com");
-$mail->addAddress("gsaobs@gmail.com");
+$mail->setFrom("email");
+$mail->addAddress("email");
 $mail->Subject = $subject2;
 $mail->Body = $body2;
     
