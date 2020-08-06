@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 760px){
     .desktop-only{
-        display: none;;
+        display: none;
     }
 }
 
@@ -245,7 +245,6 @@ footer a{
     height: auto;
 }
 
-
 .registro-btn{
     font-size: 0.9em;
     border-radius: 0;
@@ -263,6 +262,16 @@ footer a{
 .footer-social-media li{
     display: inline-block;
     padding: 10px;
+}
+
+/*CHECKOUT*/
+
+#datosVuelo{
+    display: none;
+}
+
+#numSillasBebe{
+    display: none;
 }
 
 @media screen and (max-width: 760px){

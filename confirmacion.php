@@ -5,25 +5,16 @@ require_once('tiers.php');
   include 'header.php'; 
   //(DEBUGGING) echo "Origen: ".$_GET['origen']." &nbsp;&nbsp;&nbsp; Destino: ".$_GET['destino']."&nbsp;&nbsp;&nbsp; Fecha: ".$_GET['fecha-traslado'];
 
-  if(!empty($_GET['origen'] && !empty($_GET['destino'] && !empty($_GET['fechaTraslado'] && !empty($_GET['num_pasajeros']))))){
+  if(!empty($_GET['origen'] && !empty($_GET['destino'] && !empty($_GET['fechaTraslado'])))){
     $GET = filter_var_array($_GET, FILTER_SANITIZE_STRING);
 
-    $origen = $GET['origen'];
-    $destino = $GET['destino'];
-    $fecha = $GET['fechaTraslado'];
-    $pasajeros = $GET['num_pasajeros'];
+    $origen_traslado = $GET['origen'];
+    $destino_traslado = $GET['destino'];
+    $fecha_traslado = $GET['fechaTraslado'];
 
   }else {
     //header('Location: booking.php');
-  }
-  
-  if($pasajeros <= 5){
-    $precioFinal = $precioTotal;
-    $pagoPendiente = $precioFinal - $precioReservaDec;
-  }else {
-    $precioFinal = $precioTotalXL;
-    $pagoPendiente = $precioFinal - $precioReservaDec;
-  }
+  }   
 
 
 ?>
@@ -38,15 +29,13 @@ require_once('tiers.php');
          <a href="booking.php"><p class="">Modificar reserva</p></a>
          <br />
 
-          <h1 class="title is-1">Checkout</h1>
-
 
           <div class="columns">
             <div class="column">
 
                 <h3 class="has-text-cenetred title is-3">Datos de reservación</h3>
 
-                <form name="paymentForm" action="./charge.php" method="post" id="payment-form">
+                <form name="confirmacionForm" action="checkout.php" method="post" id="confirmacion-form">
 
                   <div style="margin: 0;" class="columns">
 
@@ -54,7 +43,7 @@ require_once('tiers.php');
                     <div class="field">
                       <label class="label">Origen</label>
                       <div class="control">
-                        <input name="origen" readonly class="input" type="text" value="<?php echo $origen ?>">
+                        <input name="origen" readonly class="input" type="text" value="<?php echo $origen_traslado ?>">
                         <p id="origenValidator" class="help is-danger"></p>
                       </div>
                     </div>
@@ -63,7 +52,7 @@ require_once('tiers.php');
                     <div class="field">
                     <label class="label">Destino</label>
                     <div class="control">
-                        <input name="destino" readonly class="input" type="text" value="<?php echo $destino ?>">
+                        <input name="destino" readonly class="input" type="text" value="<?php echo $destino_traslado ?>">
                         <p id="destinoValidator" class="help is-danger"></p>
                     </div>
                   </div>
@@ -76,7 +65,7 @@ require_once('tiers.php');
                   <div class="field">
                     <label class="label">Fecha</label>
                     <div class="control has-icons-left">
-                      <input name="fecha" readonly class="input" type="text" value="<?php echo $fecha ?>">
+                      <input name="fecha" readonly class="input" type="text" value="<?php echo $fecha_traslado ?>">
                       <p id="fechaValidator" class="help is-danger"></p>
                       <span class="icon is-small is-left">
                         <i class="form-icons fa fa-calendar"></i>
@@ -89,13 +78,11 @@ require_once('tiers.php');
               <div style="margin: 0;" class="columns">
                 <div style="margin: 0;" class="column">
                   <div class="field">
-                  <label id="horarioRecordatorio" class="label">Horario de tu traslado<span style="font-size: 0.8em;">(GMT-5)</span><br /> <span style="font-size: 0.8em; color: red;">+12 hrs de horario actual:</span>&nbsp;<span id="horarioActual"></span></label>
+                  <label class="label">Horario de tu traslado<span style="font-size: 0.8em;">(GMT-5)</span><br /><span id="horarioRecordatorio" style="font-size: 0.8em; color: red;">+12 hrs de horario actual: <span id="horarioActual"></span></span></label>
                     <div class="control">
                       <div class="select">
-                      <label class="label">Selecciona el horario</label>
-                       <p id="horarioValidator" class="help is-danger"></p>
-                        <select required id="horario" name="horario">
-                          <option>Selecciona el horario</option>
+                        <select required id="horario" class="horario" name="horario">
+                          <option disabled selected value="0">Selecciona el horario</option>
                           <option value="1">1:00</option>
                           <option value="2">2:00</option>
                           <option value="3">3:00</option>
@@ -122,12 +109,11 @@ require_once('tiers.php');
                           <option value="24">24:00</option>
                         </select>
                       </div>
+                      <p id="horarioValidator" class="help is-danger"></p>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <br />
 
               <div id="origenCancun">
 
@@ -137,17 +123,17 @@ require_once('tiers.php');
                         <label class="label">¿Su punto de partida es el aeropuerto de Cancún?</label>
                         <div class="control">
                           <label class="radio">
-                          <input onclick="origenCancun();" id="origenEnAeropuerto" type="radio" name="origen_aeropuerto" value="Si">
+                          <input onclick="origenCancun();" id="origenEnAeropuerto" type="radio" name="origen_aeropuerto">
                             Sí
                           </label>
                           <label class="radio">
-                          <input onclick="origenCancun();" id="origenNoAeropuerto" type="radio" name="origen_aeropuerto" value="No">
+                          <input onclick="origenCancun();" id="origenNoAeropuerto" type="radio" name="origen_aeropuerto">
                             No
                           </label>
-                          <p id="radio1Validator" class="help is-danger"></p>
                         </div>
                       </div>
                     </div>
+                    
                   </div>
 
                   <div id="datosVuelo" style="margin: 0;" class="columns datos-vuelo">
@@ -155,8 +141,8 @@ require_once('tiers.php');
                       <div class="field">
                         <label class="label">Numero de vuelo</label>
                           <div class="control">
-                            <input id="numVuelo" name="num_vuelo" class="input" type="text" value="" placeholder="Número de vuelo">
-                            <p id="numVueloValidator" class="help is-danger"></p>
+                            <input id="numVuelo" name="num_vuelo" class="input" type="text" value="">
+                            <p id="" class="help is-danger"></p>
                           </div>
                         </div>
                     </div>
@@ -164,8 +150,8 @@ require_once('tiers.php');
                       <div class="field">
                         <label class="label">Aerolínea</label>
                           <div class="control">
-                            <input id="aerolinea" name="aerolinea" class="input" type="text" value="" placeholder="Nombre de aerolínea">
-                            <p id="aerolineaValidator" class="help is-danger"></p>
+                            <input id="aerolinea" name="aerolinea" class="input" type="text" value="">
+                            <p id="" class="help is-danger"></p>
                           </div>
                         </div>
                     </div>
@@ -178,8 +164,17 @@ require_once('tiers.php');
                   <div class="field">
                     <label class="label">Número de pasajeros</label>
                       <div class="control">
-                       <input id="numPasajeros" name="num_pasajeros" class="input" type="text" value="<?php echo $pasajeros ?>">
-                       <div id="pasajerosMsg"><span style="font-size:0.8em; color:red;">En caso de ser más de 5 pasajeros, se tomará en cuenta el precio de las columnas <a href="#" >Total XL y Cash XL</a></span></div>
+                        <div class="select">
+                          <select required id="numPasajeros" name="num_pasajeros">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                 </div>
@@ -188,7 +183,6 @@ require_once('tiers.php');
                     <label class="label">Nombres de pasajeros</label>
                       <div class="control">
                         <textarea id="nombrePasajeros" name="nombre_pasajeros" class="textarea" placeholder="Nombres separados por coma , "></textarea>
-                        <p id="nombresValidator" class="help is-danger"></p>
                       </div>
                     </div>
                 </div>
@@ -200,7 +194,6 @@ require_once('tiers.php');
                     <label class="label">Dirección exacta de origen</label>
                       <div class="control">
                         <textarea name="direccion_origen" class="textarea" placeholder="Calle, número...."></textarea>
-                        <p id="dirOrigenValidator" class="help is-danger"></p>
                       </div>
                     </div>
                 </div>
@@ -212,7 +205,6 @@ require_once('tiers.php');
                     <label class="label">Dirección exacta de destino</label>
                       <div class="control">
                         <textarea name="direccion_destino" class="textarea" placeholder="Calle, número...."></textarea>
-                        <p id="dirDestinoValidator" class="help is-danger"></p>
                       </div>
                     </div>
                 </div>
@@ -224,14 +216,13 @@ require_once('tiers.php');
                     <label class="label">¿Asientos de bebe?</label>
                       <div class="control">
                         <label class="radio">
-                          <input onclick="sillasBebe()" id="conAsientoBebe" type="radio" name="silla_bebe" value="Si">
+                          <input onclick="sillasBebe()" id="conAsientoBebe" type="radio" name="silla_bebe">
                           Si
                         </label>
                         <label class="radio">
                           <input onclick="sillasBebe()" id="sinAsientoBebe" type="radio" name="silla_bebe" value="No">
                           No
                         </label>
-                        <p id="radio2Validator" class="help is-danger"></p>
                       </div>
                     </div>
                 </div>
@@ -240,12 +231,10 @@ require_once('tiers.php');
                     <div class="control">
                       <div class="select">
                             <select id="asientosBebe" name="asientos_bebe">
-                              <option>0</option>
                               <option>1</option>
                               <option>2</option>
                             </select>
-                        </div>
-                        <p id="asientosValidator" class="help is-danger"></p>
+                          </div>
                     </div>
                 </div>
               </div>
@@ -263,7 +252,6 @@ require_once('tiers.php');
                           <input type="radio" name="paradas_intermedias" value="No">
                           No
                         </label>
-                        <p id="radio3Validator" class="help is-danger"></p>
                       </div>
                     </div>
                  </div>
@@ -279,88 +267,12 @@ require_once('tiers.php');
                     </div>
                 </div>
               </div>
-
-
-            </div>
-
-            
-                <div style="margin: 0;" class="column">
-
-                <h3 class="has-text-cenetred title is-3">Pago de reservación</h3>
-
-                <div class="field">
-                  <label class="label">Precio de traslado</label>
-                  <div class="control">
-                    <input readonly id="costo_traslado" name="costo_traslado" class="input" type="text" value="<?php echo $precioFinal ?> MXN">
-                  </div>
-                </div>  
-                
-                <div class="field">
-                  <label class="label">Precio de reserva</label>
-                  <div class="control">
-                    <input readonly id="costo_reserva" name="costo_reserva"  class="input" type="text" value="<?php echo $precioReservaDec ?> MXN">
-                  </div>
-                </div>  
-
-                <div class="field">
-                  <label class="label">Pago pendiente (efectivo)</label>
-                  <div class="control">
-                    <input readonly id="pago_pendiente" name="pago_pendiente" class="input" type="text" value="<?php echo $pagoPendiente ?> MXN">
-                  </div>
-                </div>
-
-                <hr>
-              
-
-                <div class="field">
-                    <label class="label">Nombre</label>
-                    <div class="control">
-                      <input required id="nombre" class="input" type="text" name="first_name" placeholder="e.g Alex Smith">
-                      <p id="nameValidator" class="help is-danger"></p>
-                    </div>
-                  </div>
-    
-                  <div class="field">
-                    <label class="label">Apellidos</label>
-                    <div class="control">
-                      <input required id="lastName" class="input" type="text" name="last_name" placeholder="e.g Alex Smith">
-                      <p id="lastnameValidator" class="help is-danger"></p>
-                    </div>
-                  </div>
-                  
-                  <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control">
-                      <input required id="email" class="input" type="email" name="client_email" placeholder="e.g. alexsmith@gmail.com">
-                      <p id="emailValidator" class="help is-danger"></p>
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label class="label">Teléfono móvil</label>
-                    <div class="control">
-                      <input id="telefonoMovil" class="input" type="tel" name="client_phone" placeholder="include area code">
-                      <p id="phoneValidator" class="help is-danger"></p>
-                    </div>
-                  </div>
-    
-                <div class="form-row">
-                  <label for="card-element">
-                    Credit or debit card
-                  </label>
-                  <div id="card-element">
-                    <!-- A Stripe Element will be inserted here. -->
-                  </div>
-              
-                  <!-- Used to display Element errors. -->
-                  <div id="card-errors" role="alert"></div>
-                </div>
-                <br />
-                <button onclick="validateForm()" class="button is-link">Submit Payment</button>
+              <div class="field has-text-centered">
+                <button onclick="validateForm()" class="button btn-green">Reserva</button>
+              </div>
               </form>
             </div>
           </div>
-
         </div>
 
         <div class="spacer"></div>
@@ -376,22 +288,106 @@ require_once('tiers.php');
         });
       });
 
-      //Si el origen es Cancun despliega el radio que pregunta si parten del aeropuerto
-      if (document.paymentForm.origen.value == "Cancun") {
-          document.getElementById('origenCancun').style.display = "block";
-      }else{
-          document.getElementById('origenCancun').style.display = "none";
+      //Todos los elementos de la fecha actual
+      var fecha = new Date();
+      var diaActual = fecha.getDate();
+      var mesActual = fecha.getMonth() + 1;
+      var year = fecha.getFullYear();
+      var horaActual = fecha.getHours();
+      var minutosActual = fecha.getMinutes();
+
+      //Fecha actual para validator
+      var fechaActual = mesActual + '/' + diaActual + '/' + year + ' ' + horaActual + ':' + minutosActual;
+
+      //Fecha actual para condicional
+      var diaActual = '0' + mesActual + '/' + '0' + diaActual + '/' + year;
+
+      //Valor de la fecha para condicional
+      var fechaReserva = document.confirmacionForm.fecha.value;
+
+      //Campo de horario actual
+      document.getElementById("horarioActual").innerHTML = fechaActual + 'hrs' ;
+
+      horasInt = fecha.getHours()*10000;
+      console.log(horasInt + 12);
+
+      console.log(horaActual +12);
+
+      var horaViaje = document.getElementById('horario');
+
+
+      //Cachar el valor del select de horario en jQuery
+      $(document).ready(function(){
+        $("select.horario").change(function(){
+          var selectedTime = $(this).children("option:selected").val()
+          console.log(selectedTime);
+          //Convertir el .val() a Int
+          var horaTotal = (horaActual + selectedTime);
+          console.log(horaTotal);
+          if(horaActual + selectedTime < 24){
+            alert("Está bien")
+          }else{
+            alert("Its too late (To apologize)");
+          }
+        });
+      });
+
+      //////////////// Tengo que aventar esto al server para que php lo cache
+      var pasajeros = document.getElementById('numPasajeros');
+      pasajeros.onchange = pasajerosNum;
+
+      function pasajerosNum(){
+        var numeroPasajeros = pasajeros.options[pasajeros.selectedIndex].value;
+        console.log(numeroPasajeros);
+        if(numeroPasajeros <= 5){
+          //Precio normal
+          console.log("Menos");
+        }else{
+          //precioXL
+          console.log("Mas");
+        }
       }
 
-      //Pasajeros Msg. Indica que el precio cambia cuando hay 5 o más pasajeros.
-      if (document.paymentForm.num_pasajeros.value >= 5){
-          document.getElementById('pasajerosMsg').style.display = "block";
-      }else{
-          document.getElementById('pasajerosMsg').style.display = "none";
+      
+
+
+      if (fechaReserva > diaActual){
+        alert(fechaReserva + " es mayor a " + diaActual);
+        document.getElementById('horarioRecordatorio').style.display = "none";
+        document.getElementById('horarioActual').style.display = "none";
+      } else{
+        document.getElementById('horarioRecordatorio').style.display = "block";
+        document.getElementById('horarioActual').style.display = "block";
       }
 
-  
 
+      if (document.confirmacionForm.origen.value == "Cancun") {
+          document.getElementById('origenCancun').style.display = "block"
+        }else{
+          document.getElementById('origenCancun').style.display = "none"
+        }
+
+      function origenCancun(){
+        if(document.getElementById('origenEnAeropuerto').checked) { 
+            document.getElementById('direccionOrigen').style.display = "none";
+            document.getElementById('datosVuelo').style.display = "block";
+          }else if(document.getElementById('origenNoAeropuerto').checked){
+            document.getElementById('datosVuelo').style.display = "none";
+            document.getElementById('direccionOrigen').style.display = "block";
+          }else{
+            return false;
+          }
+       }
+
+      function sillasBebe(){
+        if(document.getElementById('conAsientoBebe').checked) { 
+            document.getElementById('numSillasBebe').style.display = "block";
+          }else{
+            document.getElementById('numSillasBebe').style.display = "none";
+            return false;
+        }
+      }
+          
 
     </script>
 
@@ -399,8 +395,7 @@ require_once('tiers.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="js/client.js"></script>
-    <script src="js/fecha.js"></script>
-    <script src="js/validations.js"></script>
+    <<script src="js/validations.js"></script>
     <script src="js/bulma.js"></script>
 
 </body>

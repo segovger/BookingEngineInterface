@@ -71,11 +71,30 @@
                     <div class="column">
                       <div class="field">
                         <div class="control has-icons-left">
-                          <input name="fechaTraslado" class="input" id="datepicker" type="text" value="Fecha de traslado">
+                          <input name="fechaTraslado" class="input" id="datepicker" type="text" value="Fecha">
                           <p id="fechaValidator" class="help is-danger"></p>
                           <span class="icon is-small is-left">
                             <i class="form-icons fa fa-calendar"></i>
                           </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="field">
+                        <div class="control has-icons-left">
+                          <div class="select">
+                            <select required id="numPasajeros" name="num_pasajeros">
+                              <option>Número de pasajeros</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                              <option>7</option>
+                            </select>
+                          </div>
+                          <p id="pasajerosValidator" class="help is-danger"></p>
                         </div>
                       </div>
                     </div>
@@ -100,25 +119,33 @@
 
       if (document.bookingForm.origen.value == "Selecciona el origen"){
         document.bookingForm.origen.focus();
-        document.getElementById('origenValidator').innerHTML ="Required Field"
+        document.getElementById('origenValidator').innerHTML ="Campo requerido"
         event.preventDefault();
         return false;
         }
       
         if (document.bookingForm.destino.value == "Selecciona el destino"){
         document.bookingForm.destino.focus();
-        document.getElementById('destinoValidator').innerHTML ="Required Field"
+        document.getElementById('destinoValidator').innerHTML ="Campo requerido"
         event.preventDefault();
         return false;
         }
 
-        if (document.bookingForm.fechaTraslado.value == "Fecha de traslado"){
+        if (document.bookingForm.fechaTraslado.value == "Fecha"){
         document.bookingForm.fechaTraslado.focus();
-        document.getElementById('fechaValidator').innerHTML ="Required Field"
+        document.getElementById('fechaValidator').innerHTML ="Campo requerido"
+        event.preventDefault();
+        return false;
+        }
+
+        if (document.bookingForm.num_pasajeros.value == "Número de pasajeros"){
+        document.bookingForm.num_pasajeros.focus();
+        document.getElementById('pasajerosValidator').innerHTML ="Campo requerido"
         event.preventDefault();
         return false;
         }
       }
+      
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

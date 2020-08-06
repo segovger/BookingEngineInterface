@@ -1,0 +1,13 @@
+Secret: sk_test_3J1CbdPGPwD6vajiW7yaFCob00HXjqPbb5
+
+Publishable: pk_test_TL5gMYxP9KzSPtTBYs2ujBGW00gq3Qy0oH
+
+
+Para enviar mails (prueba):
+
+Paso 1: Definir outlets
+charge.php lineas: 141, 142, 148 [para cliente], 204, 205, 211, 212 [para admin]: Ingresar correo electronico donde quieras enviar los mails+ password 
+
+Paso 2: Activar less secure apps
+https://myaccount.google.com/lesssecureapps
+Y activar para poder recibir mails desde localhost SMTP

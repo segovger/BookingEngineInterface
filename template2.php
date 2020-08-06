@@ -257,9 +257,30 @@
 							<tr>
                                 <td style="padding: 20px; font-family: 'Work Sans', sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
                                     <h1 style="margin: 0 0 10px 0; font-family: 'Work Sans', sans-serif; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">Datos de traslado</h1>
-                                    <p style="margin: 0; color: #333333;">Costo Total: $precioTraslado</p>
-									<p style="margin: 0; color: #333333;">Precio de reserva: $precioReserva (PAGADO)</p>
-									<p style="margin: 0; color: #333333;">Pago pendiente (Pagar en persona al momento de su traslado): $pagoPendiente</p>
+                                    <p style="margin: 0; color: #333333;">Costo Total: $precioTraslado </p>
+									<p style="margin: 0; color: #333333;">Precio de reserva: $precioReserva  (PAGADO)</p>
+									<p style="margin: 0; color: #333333;">Pago pendiente (Pagar en efectivo al momento de su traslado): $pagoPendiente </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 20px; font-family: 'Work Sans', sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                                    <h1 style="margin: 0 0 10px 0; font-family: 'Work Sans', sans-serif; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">Datos de pago</h1>
+                                    <p style="margin: 0; color: #333333;">Origen Aeropuerto de Cancún: $origen_aeropuerto</p>
+                                    <p style="margin: 0; color: #333333;">No.Vuelo: $num_vuelo</p>
+                                    <p style="margin: 0; color: #333333;">Aerolinea: $aerolinea</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 20px; font-family: 'Work Sans', sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                                    <h1 style="margin: 0 0 10px 0; font-family: 'Work Sans', sans-serif; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">Datos de traslado</h1>
+                                    <p style="margin: 0; color: #333333;">Num.Pasajeros: $num_pasajeros</p>
+                                    <p style="margin: 0; color: #333333;">Nombres Pasajeros: $nombresPasajeros</p>
+                                    <p style="margin: 0; color: #333333;">Dir Exacta Origen: $origenExacto</p>
+                                    <p style="margin: 0; color: #333333;">Dir Exacta Destino: $destinoExacto</p>
+                                    <p style="margin: 0; color: #333333;">Asientos Bebe: $asientosBebe</p>
+                                    <p style="margin: 0; color: #333333;">Numero de Asientos Bebe: $numAsientosBebe</p>
+                                    <p style="margin: 0; color: #333333;">Paradas Inmediatas: $paradas</p>
+                                    <p style="margin: 0; color: #333333;">Detalles Adicionales: $detallesAdicionales</p>
                                 </td>
                             </tr>
 							<tr>
