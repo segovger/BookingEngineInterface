@@ -35,17 +35,17 @@
               <div class="content has-text-centered">
                   <ul class="footer-social-media">
                       <li>
-                          <a class="icon" href="https://github.com/dansup/bulma-templates">
+                          <a class="icon" href="#">
                               <i class="fa fa-instagram"></i>
                           </a>
                       </li>
                       <li>
-                          <a class="icon" href="https://github.com/dansup/bulma-templates">
+                          <a class="icon" href="#">
                               <i class="fa fa-facebook"></i>
                           </a>
                       </li>
                       <li>
-                          <a class="icon" href="https://github.com/dansup/bulma-templates">
+                          <a class="icon" href="#">
                               <i class="fa fa-twitter"></i>
                           </a>
                       </li>

@@ -12,7 +12,7 @@ $message = '';
 
 if(!empty($_POST['username']) && !empty($_POST['password'])):
 	
-	// Enter the new user in the database
+	// Ingresar usuario a Db
 	$sql = "INSERT INTO admins (username, password) VALUES (:username, :password)";
 	$stmt = $conn->prepare($sql);
 
