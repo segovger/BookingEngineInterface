@@ -1,11 +1,8 @@
 <?php 
 
-<<<<<<< HEAD
 require_once('tiers.php');
 
 
-=======
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
 $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
 
     require_once('vendor/autoload.php');
@@ -14,24 +11,17 @@ $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
     require_once('transactions/transaction_models/Customer.php');
 
 //INGRESAR API
-<<<<<<< HEAD
     \Stripe\Stripe::setApiKey('');
 
 
 //Recoger variables de checkout.php
 
 //Datos de cliente
-=======
-    \Stripe\Stripe::setApiKey('Secret Key');
-
-
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
 $first_name = $POST['first_name'];
 $last_name = $POST['last_name'];
 $email = $POST['client_email'];
 $token = $POST['stripeToken'];
 
-<<<<<<< HEAD
 //Datos de Pago
 $costo_traslado = $POST['costo_traslado'];
 $costo_reserva = $POST['costo_reserva'];
@@ -57,8 +47,6 @@ $num_vuelo = $POST['num_vuelo'];
 $aerolinea = $POST['aerolinea'];
 
 
-=======
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
 
 
 //Generar un cliente en Stripe
@@ -68,21 +56,11 @@ $customer = \Stripe\Customer::create([
     "source" => $token
 ]);
 
-<<<<<<< HEAD
 
 //Debugging
 $charge = \Stripe\Charge::create([
     "amount" => $precioReserva,
     "currency" => "mxn",
-=======
-//Debugging
-//echo $token;
-
-
-$charge = \Stripe\Charge::create([
-    "amount" => 500,
-    "currency" => "usd",
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
     "description" => "Booking Reservation",
     "customer" => $customer->id
 ]);
@@ -99,22 +77,15 @@ $customerData = [
 ];
 
 
-<<<<<<< HEAD
 
 //Instancias Customer
 $customer = new Customer();
 
 
-=======
-//Instancias Customer
-$customer = new Customer();
-
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
 //Agregar Customer a DB //***** */
 $customer->addCustomer($customerData); 
 
 
-<<<<<<< HEAD
 ///////Envio de Mail a cliente///////
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -254,7 +225,3 @@ if ($mail->send()) {
 
 //Redirigir a los clientes a Success Page cuando pase su pago
 header('Location: success.php?tid='.$charge->id.'&product='.$charge->description.'&email='.$charge->receipt_email);
-=======
-//Redirigir a los clientes a Success Page cuando pase su pago
-header('Location: success.php?tid='.$charge->id.'&product='.$charge->description);
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
