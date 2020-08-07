@@ -1,10 +1,6 @@
 // Set your publishable key: remember to change this to your live publishable key in production
 // See your keys here: https://dashboard.stripe.com/account/apikeys
-<<<<<<< HEAD
 var stripe = Stripe('');
-=======
-var stripe = Stripe('Publishable Key');
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
 var elements = stripe.elements();
 
 // Custom styling can be passed to options when creating an Element.
