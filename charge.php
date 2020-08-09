@@ -138,7 +138,7 @@ $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
 $mail->Username = "gsaobs@gmail.com";
-$mail->Password = 'niagaraenbici221091%';
+$mail->Password = 'pss';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
 
@@ -201,7 +201,7 @@ $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
 $mail->Username = "gsaobs@gmail.com";
-$mail->Password = 'niagaraenbici221091%';
+$mail->Password = 'pss';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
     
