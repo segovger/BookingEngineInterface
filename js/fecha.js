@@ -18,32 +18,7 @@ var fechaReserva = document.paymentForm.fecha.value;
 //Campo de horario actual
 document.getElementById("horarioActual").innerHTML = fechaActual + 'hrs' ;
 
-horasInt = fecha.getHours()*10000;
-console.log(horasInt + 12);
+horasInt = fecha.getHours()*10000; //Debugging
+console.log(horasInt + 12); //Debugging
 
-console.log(horaActual);
-
-var horaViaje = document.getElementById('horario');
-
-if(fechaReserva == diaActual){
-    console.log("Mismo día y fecha");
-  }else{
-    console.log("diferentes días");
-}
-
-if (horaActual >= 12){
-    console.log("Sale el modal");
-    //alert("Sale el Modal")
-}else{
-    console.log("No sale el modal pero las horas están condicionadas");
-}
-
-
-if (fechaReserva > diaActual){
-    document.getElementById('horarioRecordatorio').style.display = "none";
-    document.getElementById('horarioActual').style.display = "none";
-}else{
-    document.getElementById('horarioRecordatorio').style.display = "block";
-    document.getElementById('horarioActual').style.display = "block";
-    console.log("Mas de las 12");
-}
+console.log(horaActual); //Debugging

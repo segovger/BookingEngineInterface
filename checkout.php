@@ -14,7 +14,7 @@ require_once('tiers.php');
     $pasajeros = $GET['num_pasajeros'];
 
   }else {
-    //header('Location: booking.php');
+    header('Location: booking.php');
   }
   
   if($pasajeros <= 5){
@@ -339,7 +339,7 @@ require_once('tiers.php');
                   <div class="field">
                     <label class="label">Teléfono móvil</label>
                     <div class="control">
-                      <input id="telefonoMovil" class="input" type="tel" name="client_phone" placeholder="include area code">
+                      <input id="telefonoMovil" class="input" type="tel" name="client_phone" placeholder="Sin espacios ni caracteres especiales '-' '()'">
                       <p id="phoneValidator" class="help is-danger"></p>
                     </div>
                   </div>
@@ -364,6 +364,23 @@ require_once('tiers.php');
         </div>
 
         <div class="spacer"></div>
+
+        <div class="modal">
+            <div class="modal-background"></div>
+            <div class="columns is-vcentered hero hero-body has-text-centered">
+                <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Atención</p>
+                </header>
+                <section class="modal-card-body">
+                    <p>El horario de traslado debe tener una diferencia mayor a 12 horas del horario actual.</p>
+                </section>
+                <footer class="modal-card-foot" style="display: block;">
+                    <button href="booking.php" class="button is-success">Cambiar horario de traslado</button>
+                </footer>
+                </div>
+            </div>
+        </div>
 
         <?php include 'footer.php'; ?>
 

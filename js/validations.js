@@ -1,42 +1,66 @@
-  //Si parte de Cancun y su orgen es el aeropuerto, pregunta no. de vuelo y aerolinea. Si no, no.
-  function origenCancun(){
+//Datos de horario retrieved de fecha.js
 
-    if(document.getElementById('origenEnAeropuerto').checked) { 
-        document.getElementById('direccionOrigen').style.display = "none";
-        document.getElementById('datosVuelo').style.display = "block";
-        document.paymentForm.direccion_origen.value = "Aeropuerto Cancun";
-        //Validar que los datos estén ingresados en la sig. funcion
-        //validationCancun();
+  document.getElementById('horarioRecordatorio').style.display = "none";
+  document.getElementById('horarioActual').style.display = "none";
+  
+  //Validacion Día y Hora (Tiene que ser mayor a 12hrs)
+  if (fechaReserva == diaActual && horaActual > 12){
+    document.getElementById('horarioRecordatorio').style.display = "block";
+    document.getElementById('horarioActual').style.display = "block";
+    console.log('mayor'); //Debugging [Borrar después]
+    console.log("dia y hora. Debe salir el modal"); //Debugging [Borrar después]
+    //Modal Msg
+    document.querySelector('.modal').style.display = "block";
+}else if(fechaReserva == diaActual && horaActual <= 12){
+  console.log('menor'); //Debugging [Borrar después]
+    document.getElementById('horarioRecordatorio').style.display = "block";
+    document.getElementById('horarioActual').style.display = "block";
+}
+else{
+    console.log("Sin Modal");
+    //document.getElementById('horarioRecordatorio').style.display = "none";
+    //document.getElementById('horarioActual').style.display = "none";
+}
+  
+  //Si parte de Cancun y su orgen es el aeropuerto, pregunta no. de vuelo y aerolinea. Si no, no.
+function origenCancun(){
+
+  if(document.getElementById('origenEnAeropuerto').checked) { 
+      document.getElementById('direccionOrigen').style.display = "none";
+      document.getElementById('datosVuelo').style.display = "block";
+      document.paymentForm.direccion_origen.value = "Aeropuerto Cancun";
+      //Validar que los datos estén ingresados en la sig. funcion
+      //validAeropuerto();
     
-    }else if(document.getElementById('origenNoAeropuerto').checked){
-        document.getElementById('datosVuelo').style.display = "none";
-        document.getElementById('direccionOrigen').style.display = "block";
-        document.paymentForm.direccion_origen.value = ""
-        document.paymentForm.num_vuelo.value = ""
-        document.paymentForm.aerolinea.value = ""
-        }else{
-            return false;
-        }
-    }
+  }else if(document.getElementById('origenNoAeropuerto').checked){
+      document.getElementById('datosVuelo').style.display = "none";
+      document.getElementById('direccionOrigen').style.display = "block";
+      document.paymentForm.direccion_origen.value = ""
+      document.paymentForm.num_vuelo.value = ""
+      document.paymentForm.aerolinea.value = ""
+      }else{
+          return false;
+      }
+  }
     
   //Validar que los datos estén ingresados
-  function validationCancun(){
+  function validAeropuerto(){
     
-      //Numero de vuelo
-      if (document.paymentForm.num_vuelo.value == ""){
-      document.paymentForm.num_vuelo.focus();
-      document.getElementById('numVueloValidator').innerHTML ="Confirmar número de vuelo antes"
-      event.preventDefault()
-      return false;
-      }
+    //Numero de vuelo
+    if (document.paymentForm.num_vuelo.value == ""){
+    document.paymentForm.num_vuelo.focus();
+    document.getElementById('numVueloValidator').innerHTML ="Confirmar número de vuelo antes"
+    event.preventDefault()
+    return false;
+    }
     
-      //Aerolinea
-      if (document.paymentForm.aerolinea.value == ""){
-      document.paymentForm.aerolinea.focus();
-      document.getElementById('aerolineaValidator').innerHTML ="Confirmar nombre de aerolinea antes"
-      event.preventDefault()
-      return false;       
-      }
+    //Aerolinea
+    if (document.paymentForm.aerolinea.value == ""){
+    document.paymentForm.aerolinea.focus();
+    document.getElementById('aerolineaValidator').innerHTML ="Confirmar nombre de aerolinea antes"
+    event.preventDefault()
+    return false;       
+    }
   }
 
 function validateForm() {
@@ -65,6 +89,48 @@ function validateForm() {
     return false;
     }
 
+    //Si traslado se hace el mismo día pero todavía entra la posibilidad de hacerlo 12h antes
+    var horaDropdown = document.getElementById('horario');
+    console.log(horaDropdown); //Debugging [Borrar después]
+
+    var horaTraslado = horaDropdown.options[horaDropdown.selectedIndex].value;
+    console.log(horaTraslado); //Debugging [Borrar después]
+
+    if(fechaReserva == diaActual && horaActual < 12){
+      var horaSeleccionada = horaTraslado - horaActual;
+        if(horaSeleccionada >= 12){
+          alert("Horario correcto"); //Debugging [Borrar después] (Chance agregar modal msg)
+        }else{
+          alert("Horario no aceptable. Debe sercon 12 0 más hrs de anticipación"); //Debugging [Borrar después] (Chance agregar modal msg)
+          console.log(horaTraslado);
+          event.preventDefault()
+        }
+      return false;
+    }
+
+    //Si el traslado se hace al día siguiente pero hay una posibilidad de overlap 12 hrs
+    //Aqui calculamos el día de mañana
+    //86400000 es un día en milisegundos, que es la unidad del objeto Date()
+    var manana = new Date().getTime() + 86400000;
+    var tomorrow = new Date(manana);
+    var diaManana = '0' + mesActual + '/' + '0' + tomorrow.getDate() + '/' + year;
+    console.log('mañana = ' + manana); //Debugging [Borrar después]
+    console.log('hoy = ' + diaActual); //Debugging [Borrar después]
+
+    if(fechaReserva == diaManana && horaActual > 12){
+      var horaSeleccionada = horaTraslado - horaActual;
+        if(horaSeleccionada <= 12){
+          alert("Horario correcto"); //Debugging [Borrar después] (Chance agregar modal msg)
+        }else{
+          alert("Horario no aceptable. Debe sercon 12 0 más hrs de anticipación"); //Debugging [Borrar después] (Chance agregar modal msg)
+          document.getElementById('horarioRecordatorio').style.display = "block";
+          document.getElementById('horarioActual').style.display = "block";
+          event.preventDefault()
+        }
+      return false;
+    }
+
+
     //Validacion hora
     if (document.paymentForm.horario.value == "Selecciona el horario"){
     document.paymentForm.horario.focus();
@@ -88,10 +154,10 @@ function validateForm() {
       }
 
       if(radio1){
-        alert("[Debugging]Validacion Radio 1 completa");
+        console.log("[Debugging]Validacion Radio 1 completa");
         //document.paymentForm.direccion_origen.value = "Aeropuerto Cancun"
         }else{
-          alert("[Debugging]Selecciona una opcion: Radio 1");
+          alert("[Debugging]Selecciona una opcion: Radio 1"); //Debugging [Borrar después] (Chance agregar modal msg)
           event.preventDefault()
           document.getElementById('radio1Validator').innerHTML ="Especificar punto de partida"
           return false;
@@ -141,9 +207,9 @@ function validateForm() {
     }
 
     if(radio2){
-      alert("[Debugging]Validacion Radio 2 completa");
+      console.log("[Debugging]Validacion Radio 2 completa");
     }else{
-      alert("[Debugging]Selecciona una opcion: Radio 2");
+      alert("[Debugging]Selecciona una opcion: Radio 2"); //Debugging [Borrar después] (Chance agregar modal msg)
       event.preventDefault()
       document.getElementById('radio2Validator').innerHTML ="Seleccionar una opcion"
       return false;
@@ -161,9 +227,9 @@ function validateForm() {
       }
 
     if(radio3){
-      alert("[Debugging]Validacion Radio 3 completa");
+      console.log("[Debugging]Validacion Radio 3 completa");
     }else{
-      alert("[Debugging]Selecciona una opcion: Radio 3");
+      alert("[Debugging]Selecciona una opcion: Radio 3"); //Debugging [Borrar después] (Chance agregar modal msg)
       event.preventDefault()
       document.getElementById('radio3Validator').innerHTML ="Especificar punto de partida"
       return false;
@@ -194,15 +260,21 @@ function validateForm() {
     }
 
     //Validacion phone
-    if (document.paymentForm.client_email.value == "") {
-    document.paymentForm.client_email.focus();
-    document.getElementById('emailValidator').innerHTML ="Email requerido"
-    event.preventDefault()
-    return false;
-    }
-   
+   var numTel = /^\d{10}$/;
+   if(document.paymentForm.client_phone.value.match(numTel)){
+     alert("Numero correcto");
+     return true;
+     }
+     else
+     {
+     alert("Insertar numero de telefono");
+     document.getElementById('phoneValidator').innerHTML ="Telefono requerido"
+     event.preventDefault()
+     return false;
+   }
 
 }
+
   
   function sillasBebe(){
   

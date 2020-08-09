@@ -11,7 +11,7 @@ $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
     require_once('transactions/transaction_models/Customer.php');
 
 //INGRESAR API
-    \Stripe\Stripe::setApiKey('');
+    \Stripe\Stripe::setApiKey('sk_test_3J1CbdPGPwD6vajiW7yaFCob00HXjqPbb5');
 
 
 //Recoger variables de checkout.php
@@ -138,14 +138,14 @@ $body = str_replace('$detallesAdicionales', $detalles_adicionales, $body);
 $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
-$mail->Username = "email";
-$mail->Password = 'pss';
+$mail->Username = "gsaobs@gmail.com";
+$mail->Password = 'niagaraenbici2210';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
 
 //Email Settings
 $mail->isHTML(true);
-$mail->setFrom("email");
+$mail->setFrom("gsaobs@gmail.com");
 $mail->addAddress($email, $first_name);
 $mail->Subject = $subject;
 $mail->Body = $body;
@@ -201,15 +201,15 @@ $body2 = str_replace('$detallesAdicionales', $detalles_adicionales, $body2);
 $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
-$mail->Username = "email";
-$mail->Password = 'pss';
+$mail->Username = "gsaobs@gmail.com";
+$mail->Password = 'niagaraenbici2210';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
     
 //Email Settings
 $mail->isHTML(true);
-$mail->setFrom("email");
-$mail->addAddress("email");
+$mail->setFrom("gsaobs@gmail.com");
+$mail->addAddress("gsaobs@gmail.com");
 $mail->Subject = $subject2;
 $mail->Body = $body2;
     
