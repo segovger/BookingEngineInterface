@@ -57,7 +57,6 @@ $customer = \Stripe\Customer::create([
 ]);
 
 
-//Debugging
 $charge = \Stripe\Charge::create([
     "amount" => $precioReserva,
     "currency" => "mxn",
@@ -139,7 +138,7 @@ $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
 $mail->Username = "gsaobs@gmail.com";
-$mail->Password = 'niagaraenbici2210';
+$mail->Password = 'niagaraenbici221091%';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
 
@@ -202,7 +201,7 @@ $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
 $mail->Username = "gsaobs@gmail.com";
-$mail->Password = 'niagaraenbici2210';
+$mail->Password = 'niagaraenbici221091%';
 $mail->Port = 465; //587
 $mail->SMTPSecure = "ssl"; //tls
     

@@ -7,11 +7,7 @@ class Customer {
     }
 
     public function addCustomer($data){ 
-<<<<<<< HEAD
         //Query para accesar clase y Db en PDO 
-=======
-        //Query para accesar clase en PDO 
->>>>>>> 52fc2a19bf17455fd0695103d185cc5af94a5e29
         $this->db->query('INSERT INTO clients (id, first_name, last_name, email, amount) VALUES(:id, :first_name, :last_name, :email, :amount)');
 
         //Binding 

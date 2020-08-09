@@ -1,9 +1,9 @@
 <?php 
 
-$tier = "tier1"; //valores Db
+$tier = "tier1";
 
-$precioTotal = 2000; //valores Db
-$precioTotalXL = 3000; //valores Db
+$precioTotal = 2000;
+$precioTotalXL = 3000;
 
     if ($tier == "tier1"){
       $precioReserva = 20000;

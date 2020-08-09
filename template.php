@@ -283,6 +283,18 @@
                                     <p style="margin: 0; color: #333333;">Detalles Adicionales: $detallesAdicionales</p>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="padding: 20px; font-family: 'Work Sans', sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                                    <h1 style="margin: 0 0 10px 0; font-family: 'Work Sans', sans-serif; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">Datos de cliente</h1>
+                                    <p style="margin: 0; color: #333333;">Num.Pasajeros: $num_pasajeros</p>
+                                    <p style="margin: 0; color: #333333;">Nombres Pasajeros: $nombresPasajeros</p>
+                                    <p style="margin: 0; color: #333333;">Dir Exacta Origen: $origenExacto</p>
+                                    <p style="margin: 0; color: #333333;">Dir Exacta Destino: $destinoExacto</p>
+                                    <p style="margin: 0; color: #333333;">Asientos Bebe: $asientosBebe: $numAsientosBebe</p>
+                                    <p style="margin: 0; color: #333333;">Paradas Inmediatas: $paradas</p>
+                                    <p style="margin: 0; color: #333333;">Detalles Adicionales: $detallesAdicionales</p>
+                                </td>
+                            </tr>
 							<tr>
                                 <td style="padding: 0 20px;">
                                     <!-- Button : BEGIN -->

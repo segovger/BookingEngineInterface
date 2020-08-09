@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 760px){
     .desktop-only{
-        display: none;
+        display: none;;
     }
 }
 
