@@ -3,24 +3,52 @@
 document.getElementById('horarioRecordatorio').style.display = "none";
 document.getElementById('horarioActual').style.display = "none";
 
+var op = document.getElementById("horario").getElementsByTagName("option");
+var difHra = horaActual + 12;
+var difHraSig = (horaActual + 12) - 24;
+
+
+
 //Validacion Día y Hora (Tiene que ser mayor a 12hrs)
 if (fechaReserva == diaActual && horaActual >= 12){
   document.getElementById('horarioRecordatorio').style.display = "block";
   document.getElementById('horarioActual').style.display = "block";
-  console.log('mayor'); //Debugging [Borrar después]
-  console.log("dia y hora. Debe salir el modal"); //Debugging [Borrar después]
   //Modal Msg
   document.querySelector('.modal').style.display = "block";
 }else if(fechaReserva == diaActual && horaActual < 12){
-console.log('menor'); //Debugging [Borrar después]
   document.getElementById('horarioRecordatorio').style.display = "block";
   document.getElementById('horarioActual').style.display = "block";
+  h = horaActual;
+  for (; h < difHra; h++) {
+       op[h].disabled = true;
+  }
+
+  i = 0;
+  for(; i < horaActual; i++){
+      op[i].disabled = true;
+  }
 }
 else{
   console.log("Sin Modal");
-  //document.getElementById('horarioRecordatorio').style.display = "none";
-  //document.getElementById('horarioActual').style.display = "none";
 }
+
+var horaDropdown = document.getElementById('horario');
+var horaSeleccionada = horaDropdown.options[horaDropdown.selectedIndex].value;
+
+console.log('Dif hra día siguiente: ' + difHraSig);
+
+
+  if(fechaReserva == diaManana && horaActual >= 12){
+    document.getElementById('horarioRecordatorio').style.display = "block";
+    document.getElementById('horarioActual').style.display = "block";
+    for (i = 0; i < difHraSig + 1; i++) {
+      op[i].disabled = true;
+    }
+  }else{
+    console.log('Más de 12 hrs de anticipación');
+  }
+
+
 
 //Si parte de Cancun y su orgen es el aeropuerto, pregunta no. de vuelo y aerolinea. Si no, no.
 function origenCancun(){
@@ -65,11 +93,14 @@ function validAeropuerto(){
 
 function validateForm() {
 
+  //Disable el boton para previnir double submissions
+  //document.getElementById('checkoutBtn').disabled = true;
+
   //Validacion origen
   if (document.paymentForm.origen.value == "") {
   document.paymentForm.origen.focus();
   document.getElementById('origenValidator').innerHTML ="Punto de origen"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -77,7 +108,7 @@ function validateForm() {
   if (document.paymentForm.destino.value == "") {
   document.paymentForm.destino.focus();
   document.getElementById('destinoValidator').innerHTML ="Punto de destino"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -85,49 +116,8 @@ function validateForm() {
   if (document.paymentForm.fecha.value == "") {
   document.paymentForm.fecha.focus();
   document.getElementById('fechaValidator').innerHTML ="Fecha de viaje requerida"
-  event.preventDefault()
+  event.preventDefault();
   return false;
-  }
-
-  //Si traslado se hace el mismo día pero todavía entra la posibilidad de hacerlo 12h antes
-  var horaDropdown = document.getElementById('horario');
-  console.log(horaDropdown); //Debugging [Borrar después]
-
-  var horaTraslado = horaDropdown.options[horaDropdown.selectedIndex].value;
-  console.log(horaTraslado); //Debugging [Borrar después]
-
-  if(fechaReserva == diaActual && horaActual <= 12){
-    var horaSeleccionada = horaTraslado - horaActual;
-      if(horaSeleccionada > 12){
-        alert("Horario correcto"); //Debugging [Borrar después] (Chance agregar modal msg)
-      }else{
-        alert("Horario no aceptable. Debe sercon 12 0 más hrs de anticipación"); //Debugging [Borrar después] (Chance agregar modal msg)
-        console.log(horaTraslado);
-        event.preventDefault()
-      }
-    return false;
-  }
-
-  //Si el traslado se hace al día siguiente pero hay una posibilidad de overlap 12 hrs
-  //Aqui calculamos el día de mañana
-  //86400000 es un día en milisegundos, que es la unidad del objeto Date()
-  var manana = new Date().getTime() + 86400000;
-  var tomorrow = new Date(manana);
-  var diaManana = '0' + mesActual + '/' + '0' + tomorrow.getDate() + '/' + year;
-  console.log('mañana = ' + manana); //Debugging [Borrar después]
-  console.log('hoy = ' + diaActual); //Debugging [Borrar después]
-
-  if(fechaReserva == diaManana && horaActual >= 12){
-    var horaSeleccionada = horaTraslado - horaActual;
-      if(horaSeleccionada > 12){
-        alert("Horario correcto"); //Debugging [Borrar después] (Chance agregar modal msg)
-      }else{
-        alert("Horario no aceptable. Debe ser con 12 0 más hrs de anticipación"); //Debugging [Borrar después] (Chance agregar modal msg)
-        document.getElementById('horarioRecordatorio').style.display = "block";
-        document.getElementById('horarioActual').style.display = "block";
-        event.preventDefault()
-      }
-    return false;
   }
 
 
@@ -135,7 +125,7 @@ function validateForm() {
   if (document.paymentForm.horario.value == "Selecciona el horario"){
   document.paymentForm.horario.focus();
   document.getElementById('horarioValidator').innerHTML ="Horario requerido"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -159,7 +149,8 @@ function validateForm() {
       }else{
         alert("[Debugging]Selecciona una opcion: Radio 1"); //Debugging [Borrar después] (Chance agregar modal msg)
         event.preventDefault()
-        document.getElementById('radio1Validator').innerHTML ="Especificar punto de partida"
+        document.getElementById('radio1Validator').innerHTML ="Especificar punto de partida";
+    
         return false;
     }
   }
@@ -167,7 +158,7 @@ function validateForm() {
   //Número de Pasajeros
   if (document.paymentForm.num_pasajeros.value == ""){
   document.paymentForm.num_pasajeros.focus();
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -175,7 +166,7 @@ function validateForm() {
   if (document.paymentForm.nombre_pasajeros.value == ""){
   document.paymentForm.nombre_pasajeros.focus();
   document.getElementById('nombresValidator').innerHTML ="Nombres de pasajeros"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -183,7 +174,7 @@ function validateForm() {
   if (document.paymentForm.direccion_origen.value == ""){
   document.paymentForm.direccion_origen.focus();
   document.getElementById('dirOrigenValidator').innerHTML ="Dirección de origen"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -191,7 +182,7 @@ function validateForm() {
   if (document.paymentForm.direccion_destino.value == ""){
   document.paymentForm.direccion_destino.focus();
   document.getElementById('dirDestinoValidator').innerHTML ="Dirección de destino"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -211,7 +202,8 @@ function validateForm() {
   }else{
     alert("[Debugging]Selecciona una opcion: Radio 2"); //Debugging [Borrar después] (Chance agregar modal msg)
     event.preventDefault()
-    document.getElementById('radio2Validator').innerHTML ="Seleccionar una opcion"
+    document.getElementById('radio2Validator').innerHTML ="Seleccionar una opcion";
+
     return false;
   }
 
@@ -231,7 +223,8 @@ function validateForm() {
   }else{
     alert("[Debugging]Selecciona una opcion: Radio 3"); //Debugging [Borrar después] (Chance agregar modal msg)
     event.preventDefault()
-    document.getElementById('radio3Validator').innerHTML ="Especificar punto de partida"
+    document.getElementById('radio3Validator').innerHTML ="Especificar punto de partida";
+
     return false;
   }
     
@@ -239,7 +232,7 @@ function validateForm() {
   if (document.paymentForm.first_name.value == "") {
   document.paymentForm.first_name.focus();
   document.getElementById('nameValidator').innerHTML ="Nombre requerido"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -247,7 +240,7 @@ function validateForm() {
   if (document.paymentForm.last_name.value == "") {
   document.paymentForm.last_name.focus();
   document.getElementById('lastnameValidator').innerHTML ="Apellido requerido"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   } 
 
@@ -255,7 +248,7 @@ function validateForm() {
   if (document.paymentForm.client_email.value == "") {
   document.paymentForm.client_email.focus();
   document.getElementById('emailValidator').innerHTML ="Email requerido"
-  event.preventDefault()
+  event.preventDefault();
   return false;
   }
 
@@ -269,7 +262,8 @@ function validateForm() {
    {
    alert("Insertar numero de telefono");
    document.getElementById('phoneValidator').innerHTML ="Telefono requerido"
-   event.preventDefault()
+   event.preventDefault();
+
    return false;
  }
 

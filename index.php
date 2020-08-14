@@ -20,14 +20,16 @@
                     Calidad y servicio...lorem...
                   </h2>
                   <br />
+                  <div class="panel home-panel">
                   <form name="homeForm" action="checkout.php">
                   <div class="columns hero-form">
-                    <div class="column">
+                    <div class="column"></div>
+                    <div class="column is-3">
                       <div class="field">
                         <div class="control has-icons-left">
                             <div class="select home-select">
                               <select required id="origen" name="origen">
-                                <option>Selecciona el origen</option>
+                                <option>Origen</option>
                                 <option>Chiquila</option>
                                 <option>Akumal</option>
                                 <option>Bacalar</option>
@@ -50,12 +52,12 @@
                         </div>
                       </div>
                     </div>
-                    <div class="column">
+                    <div class="column is-3">
                         <div class="field">
                           <div class="control has-icons-left">
                               <div class="select home-select">
                                 <select required id="destino" name="destino">
-                                   <option>Selecciona el destino</option>
+                                   <option>Destino</option>
                                    <option>Chiquila</option>
                                    <option>Akumal</option>
                                    <option>Bacalar</option>
@@ -78,7 +80,7 @@
                           </div>
                         </div>
                       </div>
-                    <div class="column">
+                    <div class="column is-2">
                       <div class="field">
                         <div class="control has-icons-left">
                           <input name="fechaTraslado" class="input" id="datepicker" type="text" value="Fecha">
@@ -89,12 +91,12 @@
                         </div>
                       </div>
                     </div>
-                    <div class="column">
+                    <div class="column is-3">
                       <div class="field">
                         <div class="control has-icons-left">
                           <div class="select">
                             <select required id="numPasajeros" name="num_pasajeros">
-                              <option>Número de pasajeros</option>
+                              <option>Pasajeros</option>
                               <option>1</option>
                               <option>2</option>
                               <option>3</option>
@@ -105,19 +107,31 @@
                             </select>
                           </div>
                           <p id="pasajerosValidator" class="help is-danger"></p>
+                          <span class="icon is-small is-left">
+                            <i class="form-icons fa fa-users"></i>
+                          </span>
                         </div>
                       </div>
                     </div>
-                    <div class="column is-1">
+                    <!--<div class="column is-1">
                       <div class="field">
+                        <button onclick="validateForm()"class="button btn-green">Reserva</button>
+                      </div>
+                    </div>-->
+                  </div> <!--Cierra Columns-->
+                  <div class="columns">
+                    <div class="column">
+                      <div class="field has-text-centered">
                         <button onclick="validateForm()"class="button btn-green">Reserva</button>
                       </div>
                     </div>
                   </div>
-                  </form>
+                </form>
+                </div> <!--Panel-->
               </div>
             </div>
         </section>
+    
 
 
         <!--MENSAJE INICIAL-->
@@ -357,14 +371,14 @@
 
       function validateForm() {
 
-      if (document.homeForm.origen.value == "Selecciona el origen"){
+      if (document.homeForm.origen.value == "Origen"){
         document.homeForm.origen.focus();
         document.getElementById('origenValidator').innerHTML ="Selecciona ubicación de origen"
         event.preventDefault();
         return false;
         }
       
-        if (document.homeForm.destino.value == "Selecciona el destino"){
+        if (document.homeForm.destino.value == "Destino"){
         document.homeForm.destino.focus();
         document.getElementById('destinoValidator').innerHTML ="Selecciona destino"
         event.preventDefault();
@@ -378,7 +392,7 @@
         return false;
         }
 
-        if (document.homeForm.num_pasajeros.value == "Número de pasajeros"){
+        if (document.homeForm.num_pasajeros.value == "Pasajeros"){
         document.homeForm.num_pasajeros.focus();
         document.getElementById('pasajerosValidator').innerHTML ="Número de pasajeros"
         event.preventDefault();

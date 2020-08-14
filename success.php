@@ -29,7 +29,7 @@
             <div class="container">
                     <div class="columns is-vcentered">
                     <div class="column">
-                     <h1 class="has-text-centered title is-1">Gracias por comprar <?php echo $product; ?></h1>
+                     <h1 class="has-text-centered title is-1">Gracias por comprar tu traslado con Cancun Travelers</h1>
                      <hr>
                      <p class="has-text-centered">Para más información revisar correo: <?php echo $email; ?></p>
                      <br />

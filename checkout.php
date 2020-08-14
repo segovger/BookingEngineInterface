@@ -14,7 +14,7 @@ require_once('tiers.php');
     $pasajeros = $GET['num_pasajeros'];
 
   }else {
-    //header('Location: booking.php');
+    header('Location: booking.php');
   }
   
   if($pasajeros <= 5){
@@ -348,7 +348,7 @@ require_once('tiers.php');
                   <label for="card-element">
                     Credit or debit card
                   </label>
-                  <div id="card-element">
+                  <div class="checkout-card-element" id="card-element">
                     <!-- A Stripe Element will be inserted here. -->
                   </div>
               
@@ -356,7 +356,7 @@ require_once('tiers.php');
                   <div id="card-errors" role="alert"></div>
                 </div>
                 <br />
-                <button onclick="validateForm()" class="button is-link">Submit Payment</button>
+                <button id="checkoutBtn" onclick="validateForm()" class="button is-link">Submit Payment</button>
               </form>
             </div>
           </div>
@@ -376,7 +376,7 @@ require_once('tiers.php');
                     <p>El horario de traslado debe tener una diferencia mayor a 12 horas del horario actual.</p>
                 </section>
                 <footer class="modal-card-foot" style="display: block;">
-                    <a href="booking.php"><button class="button is-success">Cambiar horario de traslado</button></a> 
+                    <a href="booking.php"><button class="button is-success">Cambiar día de traslado</button></a> 
                 </footer>
                 </div>
             </div>

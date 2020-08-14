@@ -166,6 +166,9 @@ footer a{
     .control{
         display: inline-block;
     }
+    .textarea:not([rows]) {
+        width: 300px !important;
+    }
 }
 
 
@@ -179,6 +182,10 @@ footer a{
     background-image: url('../img/2.jpg');
     background-size: cover;
     height: 600px;
+}
+
+.panel-white{
+    background: white;
 }
 
 .overlay{
@@ -279,6 +286,12 @@ footer a{
         padding: 30px;
     }
 
+    .home-panel{
+        text-align: left;
+        padding-left: 40px;
+        background: white;
+    }
+
     .home-hero-section{
         background-image: url('../img/2-mobile.jpg');
     }
@@ -306,6 +319,9 @@ footer a{
 
     footer{
         text-align: center;
+    }
+    .checkout-card-element{
+        padding: 45px;
     }
 }
 

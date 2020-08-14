@@ -19,43 +19,37 @@
                     <table class="table table is-fullwidth">
                     <thead>
                       <tr style="background-color: white;">
-                        <th>Traslado</th>
-                        <th>Precio</th>
-                        <th>Fecha</th>
+                        <th>Origen - Destino</th>
                         <th>Reserva</th>
                       </tr>
                     </thead>
                       <tbody>
                         <tr>
-                          <form action="checkout.php">
+                          <form action="confirmacion.php">
                           <td class="destinos-populares">
                           <div class="columns is-vcentered">
-                            <div class="column"><input class="input input-traslado" readonly name="origen" value="Origen 1" /></div>
+                            <div class="column"><input class="input input-traslado" readonly name="origen" value="Cancún" /></div>
                             <div class="column is-1"> - </div>
-                            <div class="column"><input class="input input-traslado" readonly name="destino" value="Destino 1" /></div>
+                            <div class="column"><input class="input input-traslado" readonly name="destino" value="Zona Hotelera Tulum" /></div>
                           </div>
                           </td>
-                          <td class="destinos-populares">Precio</td>
-                          <td class="destinos-populares"><input required name="fechaTraslado" class="input datepicker" type="text" placeholder="Fecha de traslado"></td>
                           <td><button class="button is-white" type="submit"><img class="reserva-icon" src="img/reserva-icon.svg" alt=""></span></button><span></td>
                           </form>
                         </tr>
                         <tr>
-                          <form action="checkout.php">
+                          <form action="confirmacion.php">
                           <td class="destinos-populares">
                           <div class="columns is-vcentered">
-                            <div class="column"><input class="input input-traslado" readonly name="origen" value="Origen 2" /></div>
+                            <div class="column"><input class="input input-traslado" readonly name="origen" value="Cancún" /></div>
                             <div class="column is-1"> - </div>
-                            <div class="column"><input class="input input-traslado" readonly name="destino" value="Destino 1" /></div>
+                            <div class="column"><input class="input input-traslado" readonly name="destino" value="Playa del Carmen" /></div>
                           </div>
                           </td>
-                          <td class="destinos-populares">Precio</td>
-                          <td class="destinos-populares"><input required name="fechaTraslado" class="input datepicker" type="text" placeholder="Fecha de traslado"></td>
                           <td><button class="button is-white" type="submit"><img class="reserva-icon" src="img/reserva-icon.svg" alt=""></span></button><span></td>
                           </form>
                         </tr>
                         <tr>
-                          <form action="checkout.php">
+                          <form action="confirmacion.php">
                           <td class="destinos-populares">
                           <div class="columns is-vcentered">
                             <div class="column"><input class="input input-traslado" readonly name="origen" value="Origen 1" /></div>
@@ -63,13 +57,11 @@
                             <div class="column"><input class="input input-traslado" readonly name="destino" value="Destino 3" /></div>
                           </div>
                           </td>
-                          <td class="destinos-populares">Precio</td>
-                          <td class="destinos-populares"><input required name="fechaTraslado" class="input datepicker" type="text" placeholder="Fecha de traslado"></td>
                           <td><button class="button is-white" type="submit"><img class="reserva-icon" src="img/reserva-icon.svg" alt=""></span></button><span></td>
                           </form>
                         </tr>
                         <tr>
-                          <form action="checkout.php">
+                          <form action="confirmacion.php">
                           <td class="destinos-populares">
                           <div class="columns is-vcentered">
                             <div class="column"><input class="input input-traslado" readonly name="origen" value="Origen 3" /></div>
@@ -77,8 +69,6 @@
                             <div class="column"><input class="input input-traslado" readonly name="destino" value="Destino 4" /></div>
                           </div>
                           </td>
-                          <td class="destinos-populares">Precio</td>
-                          <td class="destinos-populares"><input required name="fechaTraslado" class="input datepicker" type="text" placeholder="Fecha de traslado"></td>
                           <td><button class="button is-white" type="submit"><img class="reserva-icon" src="img/reserva-icon.svg" alt=""></span></button><span></td>
                           </form>
                         </tr>

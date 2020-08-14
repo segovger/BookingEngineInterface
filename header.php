@@ -101,7 +101,12 @@ if( isset($_SESSION['user_id']) ){
                   </a>
                   <a href="traslados.php" class="navbar-item">
                     Traslados
-                </a>
+                  </a>
+                    <?php if( !empty($user) ): ?>
+                    <a class="navbar-item" href="logout.php">&nbsp;Cerrar sesión</a>
+                    <?php else: ?>
+                    <?php endif; ?>
+                  </a>
                 </div>
               </div>
             </nav>
