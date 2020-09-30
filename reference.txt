@@ -2,6 +2,11 @@ Secret: sk_test_3J1CbdPGPwD6vajiW7yaFCob00HXjqPbb5
 
 Publishable: pk_test_TL5gMYxP9KzSPtTBYs2ujBGW00gq3Qy0oH
 
+Calendar:
+
+ClientID:751585451727-5imi219p2uvd85nqpmk6oq0idehvtmcv.apps.googleusercontent.com
+ClientSectret: r4DK_4tqmQuqnVQU4Ij1k1wF
+
 
 Para enviar mails (prueba):
 

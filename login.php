@@ -21,7 +21,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])):
 	if(count($results) > 0 && password_verify($_POST['password'], $results['password']) ){
 
 		$_SESSION['user_id'] = $results['id'];
-		header("Location: cust.php");
+		header("Location: admin.php");
 
 	} else {
 		$message = 'Los campos no coinciden con el usuario';
@@ -37,6 +37,79 @@ endif;
 
 <?php include 'header.php'; ?>
 <title>Ingreso</title>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="index.php">
+      <img src="img/Logo Cancun Travelers.svg" width="112" height="28">
+    </a>
+            
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+            
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+    </div>
+            
+    <div class="navbar-end uppercase">
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <?php echo $lang['language'] ?>
+          </a>
+              
+          <div class="navbar-dropdown">
+            <a href="index.php?lang=es" class="navbar-item">
+              <?php echo $lang['lang_es'] ?>
+            </a>
+            <a href="index.php?lang=en"  href="en/index.php" class="navbar-item">
+              <?php echo $lang['lang_en'] ?>
+            </a>
+            <a href="index.php?lang=de" class="navbar-item">
+              <?php echo $lang['lang_de'] ?>
+            </a>
+            <a href="index.php?lang=fr" class="navbar-item">
+              <?php echo $lang['lang_fr'] ?>
+            </a>
+          </div>
+      </div>
+      <a href="nosotros.php" class="navbar-item">
+        <?php echo $lang['nosotros'] ?>
+      </a>
+      <a href="contacto.php" class="navbar-item">
+        <?php echo $lang['contacto'] ?>
+      </a>
+      <a href="grupos.php" class="navbar-item">
+        <?php echo $lang['grupos'] ?>
+      </a>
+      <a href="covid.php" class="navbar-item">
+        <?php echo $lang['covid'] ?>
+      </a>
+      <a href="faq.php" class="navbar-item">
+        <?php echo $lang['FAQs'] ?>
+      </a>
+      <a href="booking.php" class="navbar-item">
+        <?php echo $lang['booking'] ?>
+      </a>
+      <a href="traslados.php" class="navbar-item">
+        <?php echo $lang['traslados'] ?>
+      </a>
+        <?php if( !empty($user) ): ?>
+        <a class="navbar-item" href="admin.php">&nbsp;<span class="tag is-link is-medium"><span style="font-size: 0.8em">Admin panel</span></span></a>
+        <?php else: ?>
+        <?php endif; ?>
+      </a>
+      </a>
+        <?php if( !empty($user) ): ?>
+        <a class="navbar-item" href="logout.php">&nbsp;Cerrar sesión</a>
+        <?php else: ?>
+        <?php endif; ?>
+      </a>
+    </div>
+  </div>
+</nav>
 <section class="hero is-light is-fullheight">
         <div class="hero-body">
             <div class="container has-text-centered">
@@ -63,7 +136,7 @@ endif;
                                     <input class="input is-large" type="password" name="password" placeholder="Contraseña">
                                 </div>
                             </div>
-                            <button type="submit" name="ingreso" class="button is-block is-info is-large is-fullwidth">Ingreso</button>
+                            <button type="submit" name="ingreso" class="button is-info is-large">Ingreso</button>
                         </form>
 
                     </div>
@@ -73,8 +146,5 @@ endif;
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/script.js" type="text/javascript"></script>
-    <script src="js/precios.js" type="text/javascript"></script>
-    <script src="js/sticky.js"></script>
   </body>
 </html>

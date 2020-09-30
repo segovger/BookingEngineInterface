@@ -4,12 +4,12 @@
 
     $id = $_GET['id'];
 
-    $sql = 'DELETE FROM clients WHERE id= :id';
+    $sql = 'DELETE FROM transactions WHERE id= :id';
 
     $statement = $conn->prepare($sql);
 
     if($statement->execute([':id' => $id])){
 
-        header("Location: cust.php");
+        header("Location: transaction-records.php");
     }
 ?>

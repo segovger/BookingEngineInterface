@@ -8,44 +8,40 @@
           <div class="container">
               <div class="columns">
                   <div class="column is-3 is-offset-2">
-                      <h2><strong>Compañía</strong></h2>
+                      <h2><strong><?php echo $lang['col1_title'] ?></strong></h2>
                       <ul>
-                          <li><a href="#">Nosotros</a></li>
-                          <li><a href="#">Blog</a></li>
-                          <li><a href="#">Contacto</a></li>
+                          <li><a href="nosotros.php"><?php echo $lang['col1_element1'] ?></a></li>
+                          <li><a href="contacto.php"><?php echo $lang['col1_element3'] ?></a></li>
                       </ul>
                   </div>
                   <div class="column is-3">
-                      <h2><strong>Legal</strong></h2>
+                      <h2><strong><?php echo $lang['col2_title'] ?></strong></h2>
                       <ul>
-                          <li><a href="#">Términos y condiciones</a></li>
-                          <li><a href="#">Politica de privacidad</a></li>
-                          <li><a href="#">Información legal</a></li>
+                          <li><a href="terms.php"><?php echo $lang['col2_element1'] ?></a></li>
+                          <li><a href="aviso-privacidad.php"><?php echo $lang['col2_element2'] ?></a></li>
                       </ul>
                   </div>
                   <div class="column is-4">
-                      <h2><strong>Nuestra plataforma</strong></h2>
+                      <h2><strong><?php echo $lang['col3_title'] ?></strong></h2>
                       <ul>
-                          <li><a href="#">¿Cómo funciona?</a></li>
-                          <li><a href="#">Ayuda</a></li>
-                          <li><a href="#">FAQs</a></li>
+                          <li><a href="faq.php"><?php echo $lang['col3_element3'] ?></a></li>
                       </ul>
                   </div>
               </div>
               <div class="content has-text-centered">
                   <ul class="footer-social-media">
                       <li>
-                          <a class="icon" href="https://github.com/dansup/bulma-templates">
+                          <a class="icon" href="#">
                               <i class="fa fa-instagram"></i>
                           </a>
                       </li>
                       <li>
-                          <a class="icon" href="https://github.com/dansup/bulma-templates">
+                          <a class="icon" href="#">
                               <i class="fa fa-facebook"></i>
                           </a>
                       </li>
                       <li>
-                          <a class="icon" href="https://github.com/dansup/bulma-templates">
+                          <a class="icon" href="#">
                               <i class="fa fa-twitter"></i>
                           </a>
                       </li>

@@ -1,7 +1,88 @@
-<?php include 'header.php'; ?>
+<?php 
+
+include 'header.php'; 
+include 'lang.php';
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="index.php">
+      <img src="img/Logo Cancun Travelers.svg" width="112" height="28">
+    </a>
+            
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+            
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+    </div>
+            
+    <div class="navbar-end uppercase">
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <?php echo $lang['language'] ?>
+          </a>
+              
+          <div class="navbar-dropdown">
+            <a href="index.php?lang=es" class="navbar-item">
+              <?php echo $lang['lang_es'] ?>
+            </a>
+            <a href="index.php?lang=en"  href="en/index.php" class="navbar-item">
+              <?php echo $lang['lang_en'] ?>
+            </a>
+            <a href="index.php?lang=de" class="navbar-item">
+              <?php echo $lang['lang_de'] ?>
+            </a>
+            <a href="index.php?lang=fr" class="navbar-item">
+              <?php echo $lang['lang_fr'] ?>
+            </a>
+          </div>
+      </div>
+      <a href="nosotros.php" class="navbar-item">
+        <?php echo $lang['nosotros'] ?>
+      </a>
+      <a href="contacto.php" class="navbar-item">
+        <?php echo $lang['contacto'] ?>
+      </a>
+      <a href="grupos.php" class="navbar-item">
+        <?php echo $lang['grupos'] ?>
+      </a>
+      <a href="covid.php" class="navbar-item">
+        <?php echo $lang['covid'] ?>
+      </a>
+      <a href="faq.php" class="navbar-item">
+        <?php echo $lang['FAQs'] ?>
+      </a>
+      <a href="booking.php" class="navbar-item">
+        <?php echo $lang['booking'] ?>
+      </a>
+      <a href="traslados.php" class="navbar-item">
+        <?php echo $lang['traslados'] ?>
+      </a>
+        <?php if( !empty($user) ): ?>
+        <a class="navbar-item" href="admin.php">&nbsp;<span class="tag is-link is-medium"><span style="font-size: 0.8em">Admin panel</span></span></a>
+        <?php else: ?>
+        <?php endif; ?>
+      </a>
+      </a>
+        <?php if( !empty($user) ): ?>
+        <a class="navbar-item" href="logout.php">&nbsp;Cerrar sesión</a>
+        <?php else: ?>
+        <?php endif; ?>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
     <section class="hero is-fullheight is-default is-bold">
         <div class="hero-head">
 
@@ -9,128 +90,126 @@
         
         <!--HERO-->
 
-        <section class="hero home-hero-section">
-            <div class="overlay"></div>
-            <div class="hero-body">
-              <div class="container">
-                  <h1 class="title has-text-centered">
-                    Encuentra tu traslado ideal
-                  </h1>
-                  <h2 class="subtitle has-text-centered">
-                    Calidad y servicio...lorem...
-                  </h2>
-                  <br />
-                  <div class="panel home-panel">
-                  <form name="homeForm" action="checkout.php">
-                  <div class="columns hero-form">
-                    <div class="column"></div>
-                    <div class="column is-3">
-                      <div class="field">
-                        <div class="control has-icons-left">
-                            <div class="select home-select">
-                              <select required id="origen" name="origen">
-                                <option>Origen</option>
-                                <option>Chiquila</option>
-                                <option>Akumal</option>
-                                <option>Bacalar</option>
-                                <option>Cancun</option>
-                                <option>Coba</option>
-                                <option>Costa Mujeres</option>
-                                <option>Mahahual</option>
-                                <option>Playa del Carmen</option>
-                                <option>Puerto Aventuras</option>
-                                <option>Puerto Juarez</option>
-                                <option>Puerto Morelos</option>
-                                <option>Punta Maroma</option>
-                                <option>Tulum (Zona Hotelera)</option>
-                              </select>
-                              <p id="origenValidator" class="help is-danger"></p>
-                            </div>
-                          <span class="icon is-small is-left">
-                            <i class="form-icons fa fa-map-marker"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="column is-3">
-                        <div class="field">
-                          <div class="control has-icons-left">
-                              <div class="select home-select">
-                                <select required id="destino" name="destino">
-                                   <option>Destino</option>
-                                   <option>Chiquila</option>
-                                   <option>Akumal</option>
-                                   <option>Bacalar</option>
-                                   <option>Cancun</option>
-                                   <option>Coba</option>
-                                   <option>Costa Mujeres</option>
-                                   <option>Mahahual</option>
-                                   <option>Playa del Carmen</option>
-                                   <option>Puerto Aventuras</option>
-                                   <option>Puerto Juarez</option>
-                                   <option>Puerto Morelos</option>
-                                   <option>Punta Maroma</option>
-                                   <option>Tulum (Zona Hotelera)</option>
-                                </select>
-                                <p id="destinoValidator" class="help is-danger"></p>
-                              </div>
-                            <span class="icon is-small is-left">
-                              <i class="form-icons fa fa-map-marker"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    <div class="column is-2">
-                      <div class="field">
-                        <div class="control has-icons-left">
-                          <input name="fechaTraslado" class="input" id="datepicker" type="text" value="Fecha">
-                          <p id="fechaValidator" class="help is-danger"></p>
-                          <span class="icon is-small is-left">
-                            <i class="form-icons fa fa-calendar"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="column is-3">
-                      <div class="field">
-                        <div class="control has-icons-left">
-                          <div class="select">
-                            <select required id="numPasajeros" name="num_pasajeros">
-                              <option>Pasajeros</option>
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              <option>6</option>
-                              <option>7</option>
-                            </select>
-                          </div>
-                          <p id="pasajerosValidator" class="help is-danger"></p>
-                          <span class="icon is-small is-left">
-                            <i class="form-icons fa fa-users"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <!--<div class="column is-1">
-                      <div class="field">
-                        <button onclick="validateForm()"class="button btn-green">Reserva</button>
-                      </div>
-                    </div>-->
-                  </div> <!--Cierra Columns-->
-                  <div class="columns">
-                    <div class="column">
-                      <div class="field has-text-centered">
-                        <button onclick="validateForm()"class="button btn-green">Reserva</button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                </div> <!--Panel-->
+      <section class="hero is-fullheight home-hero-section">
+      <div class="overlay"></div>
+      <div class="hero-body">
+        <div class="container">
+        <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column">
+          <h4 class="subtitle is-5"><?php echo $lang['intro_subtitle'] ?></h4>
+          <h2 class="title is-1"><?php echo $lang['intro_title'] ?></h2>
+        </div> <!---Col inicia--->
+        <div class="column">
+          <div class="panel panel-white" style="padding: 40px; text-align: left;">
+            <form name="homeForm" action="checkout.php">
+            <div class="field" style="margin-bottom: 2.75rem;" style="margin-bottom: 2.75rem;">
+          <div class="control has-icons-left">
+              <div class="select home-select">
+                  <select required id="origen" name="origen">
+                      <option value="0"><?php echo $lang['origen'] ?></option>
+                      <option>Chiquilá</option>
+                      <option>Akumal</option>
+                      <option>Bacalar</option>
+                      <option>Cancún</option>
+                      <option>Cobá</option>
+                      <option>Costa Mujeres</option>
+                      <option>Mahahual</option>
+                      <option>Playa del Carmen</option>
+                      <option>Puerto Aventuras</option>
+                      <option>Puerto Juárez</option>
+                      <option>Puerto Morelos</option>
+                      <option>Punta Maroma</option>
+                      <option>Tulum</option>
+                    </select>
+                      <p id="origenValidator" class="help is-danger validation-notification"><?php echo $lang['validation_txt'] ?></p>
+              </div>
+                <span class="icon is-small is-left">
+                  <i class="form-icons fa fa-map-marker"></i>
+                </span>
+           </div>
+         </div>
+         <div class="field" style="margin-bottom: 2.75rem;">
+            <div class="control has-icons-left">
+                <div class="select home-select">
+                    <select required id="destino" name="destino">
+                      <option value="0"><?php echo $lang['destino'] ?></option>
+                      <option>Chiquilá</option>
+                      <option>Akumal</option>
+                      <option>Bacalar</option>
+                      <option>Cancún</option>
+                      <option>Cobá</option>
+                      <option>Costa Mujeres</option>
+                      <option>Mahahual</option>
+                      <option>Playa del Carmen</option>
+                      <option>Puerto Aventuras</option>
+                      <option>Puerto Juárez</option>
+                      <option>Puerto Morelos</option>
+                      <option>Punta Maroma</option>
+                      <option>Tulum</option>
+                    </select>
+                      <p id="destinoValidator" class="help is-danger validation-notification"><?php echo $lang['validation_txt'] ?></p>
+              </div>
+                <span class="icon is-small is-left">
+                  <i class="form-icons fa fa-map-marker"></i>
+                </span>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom: 2.75rem;">
+            <div class="control has-icons-left">
+              <input name="fechaTraslado" class="input" id="datepicker" type="text" value="<?php echo $lang['fecha'] ?>" style="z-index: 9;">
+              <p id="fechaValidator" class="help is-danger validation-notification"><?php echo $lang['validation_txt'] ?></p>
+                <span class="icon is-small is-left">
+                  <i class="form-icons fa fa-calendar"></i>
+                </span>
+            </div>
+         </div>
+         <div class="field field-margin" style="margin-bottom: 2.75rem;">
+            <div class="control has-icons-left">
+              <div class="select">
+                <select required id="numPasajeros" name="num_pasajeros">
+                    <option value="0"><?php echo $lang['pasajeros'] ?></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+              </div>
+              <p id="pasajerosValidator" class="help is-danger validation-notification"><?php echo $lang['validation_txt'] ?></p>
+                <span class="icon is-small is-left">
+                  <i class="form-icons fa fa-users"></i>
+                </span>
+            </div>
+          </div>
+          <!--
+          <div class="field" style="margin-bottom: 2.75rem;">
+            <div class="control has-icons-left">
+              <input name="" class="input" id="" type="text" value="" placeholder="code...">
+                <span class="icon is-small is-left">
+                  <i class="form-icons fa fa-ticket"></i>
+                </span>
+            </div>
+         </div>
+         -->
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <button onclick="validateForm()"class="button btn-green"><?php echo $lang['button'] ?></button>
               </div>
             </div>
-        </section>
+          </div>
+          </div>
+        </form>
+        </div> <!---Col acaba---->
+      </div>
+    </div>
+
+        </div>
+      </div>
+    </section>
     
 
 
@@ -140,10 +219,10 @@
             <div class="hero-body">
               <div class="container has-text-centered">
                 <h1 class="title">
-                  Visita los mejores destinos turisticos de Cancún
+                  <?php echo $lang['initial_msg'] ?>
                 </h1>
                 <h2 class="subtitle pt">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe modi quidem odio rerum nulla nihil asperiores adipisci porro voluptatum et, voluptate soluta quasi, doloremque reprehenderit, obcaecati tempora maiores minus est.
+                  <?php echo $lang['initial_desc'] ?>
                 </h2>
               </div>
             </div>
@@ -175,12 +254,12 @@
                   <div class="card-content">
                     <div class="media">
                       <div class="media-content">
-                        <p class="title is-4">Aeropuerto - Hospedaje</p>
+                        <p class="title is-4"><?php echo $lang['airport_hotel'] ?></p>
                       </div>
                     </div>
                 
                     <div class="content">
-                      <a class="card-cta" href="booking.php">Agenda tu traslado</a>
+                      <a class="card-cta" href="booking.php"><?php echo $lang['airport_hotel_cta'] ?></a>
                       <br>
                     </div>
                   </div>
@@ -202,12 +281,12 @@
                   <div class="card-content">
                     <div class="media">
                       <div class="media-content">
-                        <p class="title is-4">Destinos Turisticos</p>
+                        <p class="title is-4"><?php echo $lang['vacational_spots'] ?></p>
                       </div>
                     </div>
                 
                     <div class="content">
-                      <a class="card-cta" href="booking.php">Agenda tu traslado</a>
+                      <a class="card-cta" href="booking.php"><?php echo $lang['vacational_spots_cta'] ?></a>
                       <br>
                     </div>
                   </div>
@@ -229,12 +308,12 @@
                   <div class="card-content">
                     <div class="media">
                       <div class="media-content">
-                        <p class="title is-4">Sitios Arqueologicos</p>
+                        <p class="title is-4"><?php echo $lang['archeological_sites'] ?></p>
                       </div>
                     </div>
                 
                     <div class="content">
-                      <a class="card-cta" href="booking.php">Agenda tu traslado</a>
+                      <a class="card-cta" href="booking.php"><?php echo $lang['archeological_sites_cta'] ?></a>
                       <br>
                     </div>
                   </div>
@@ -259,13 +338,13 @@
                 <div class="columns is-vcentered">
                     <div class="column is-6">
                         <h1 class="title is-2">
-                            Servicio de excelencia
+                          <?php echo $lang['cta_title'] ?>
                         </h1>
                         <h2 class="subtitle is-6 pt">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem pariatur architecto odio beatae dolor rerum esse non.
+                          <?php echo $lang['cta_des'] ?>
                         </h2>
                         <div class="buttons">
-                          <a href="nosotros.php"><button class="button btn-green">Conoce más de nosotros</button></a>
+                          <a href="nosotros.php"><button class="button btn-green"><?php echo $lang['cta_button'] ?></button></a>
                         </div>
                         <div class="small-spacer"></div>
                     </div>
@@ -302,10 +381,10 @@
             <div class="hero-body">
               <div class="container has-text-centered">
                 <h1 class="title">
-                  Visita los mejores destinos turisticos de Cancún
+                  <?php echo $lang['msg2_title'] ?>
                 </h1>
                 <h2 class="subtitle pt">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe modi quidem odio rerum nulla nihil asperiores adipisci porro voluptatum et, voluptate soluta quasi, doloremque reprehenderit, obcaecati tempora maiores minus est.
+                  <?php echo $lang['msg2_desc'] ?>
                 </h2>
               </div>
             </div>
@@ -322,25 +401,29 @@
             <div style="margin: 0;" class="columns is-vcentered">
               <div class="column is-full-mobile">
                 <section class="panel">
-                  <p class="has-text-centered panel-heading">Destinos populares</p>
+                  <p class="has-text-centered panel-heading"><?php echo $lang['popular_trips_title'] ?></p>
                   <div class="panel-block">
                     <table class="table table is-fullwidth">
                       <tbody>
                         <tr>
                           <td><span><img class="minivan-icon" src="img/minivan.png" alt=""></span></td>
-                          <td class="destinos-populares">Destino de origen - Destino 2</td>
+                          <td class="destinos-populares"><a href="cancun-cancun.php">Cancún - Cancún</a><br /><span style="font-size: 0.8em;">(<?php echo $lang['gpos_form_servicios_1'] ?>)</span></td>
                         </tr>
                         <tr>
                           <td><span><img class="minivan-icon" src="img/minivan.png" alt=""></span></td>
-                          <td class="destinos-populares">Destino de origen - Destino 2</td>
+                          <td class="destinos-populares"><a href="cancun-playadelcarmen.php">Cancún - Playa Del Carmen</a></td>
                         </tr>
                         <tr>
                           <td><span><img class="minivan-icon" src="img/minivan.png" alt=""></span></td>
-                          <td class="destinos-populares">Destino de origen - Destino 2</td>
+                          <td class="destinos-populares"><a href="cancun-tulum.php">Cancún - Tulum</a></td>
                         </tr>
                         <tr>
                           <td><span><img class="minivan-icon" src="img/minivan.png" alt=""></span></td>
-                          <td><a class="red-link" href="traslados.php">Los destinos más recurridos</a></td>
+                          <td class="destinos-populares"><a href="cancun-chiquila.php">Cancún - Chiquilá</a></td>
+                        </tr>
+                        <tr>
+                          <td><span><img class="minivan-icon" src="img/minivan.png" alt=""></span></td>
+                          <td><a class="red-link" href="traslados.php"><?php echo $lang['trips_cta'] ?></a></td>
                         </tr>
                       </tbody>
                     </table>
@@ -371,30 +454,30 @@
 
       function validateForm() {
 
-      if (document.homeForm.origen.value == "Origen"){
+      if (document.homeForm.origen.value == "0"){
         document.homeForm.origen.focus();
-        document.getElementById('origenValidator').innerHTML ="Selecciona ubicación de origen"
+        document.getElementById('origenValidator').classList.remove("validation-notification");
         event.preventDefault();
         return false;
         }
       
-        if (document.homeForm.destino.value == "Destino"){
+        if (document.homeForm.destino.value == "0"){
         document.homeForm.destino.focus();
-        document.getElementById('destinoValidator').innerHTML ="Selecciona destino"
+        document.getElementById('destinoValidator').classList.remove("validation-notification");
         event.preventDefault();
         return false;
         }
 
-        if (document.homeForm.fechaTraslado.value == "Fecha"){
+        if (document.homeForm.fechaTraslado.value == "Fecha" || document.homeForm.fechaTraslado.value == "Date" || document.homeForm.fechaTraslado.value == "Date[fr]" ){
         document.homeForm.fechaTraslado.focus();
-        document.getElementById('fechaValidator').innerHTML ="Fecha de tu traslado"
+        document.getElementById('fechaValidator').classList.remove("validation-notification");
         event.preventDefault();
         return false;
         }
 
-        if (document.homeForm.num_pasajeros.value == "Pasajeros"){
+        if (document.homeForm.num_pasajeros.value == "0"){
         document.homeForm.num_pasajeros.focus();
-        document.getElementById('pasajerosValidator').innerHTML ="Número de pasajeros"
+        document.getElementById('pasajerosValidator').classList.remove("validation-notification");
         event.preventDefault();
         return false;
         }

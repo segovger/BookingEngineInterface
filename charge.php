@@ -1,6 +1,8 @@
 <?php 
 
-require_once('tiers.php');
+//require_once('tiers.php');
+include 'lang.php';
+require_once('quickstart.php');
 
 
 $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
@@ -9,6 +11,7 @@ $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
     require_once('transactions/transactionsDb/db.php');
     require_once('lib/pdo_db.php');
     require_once('transactions/transaction_models/Customer.php');
+    require_once('transactions/transaction_models/Transaction.php');
 
 //INGRESAR API
     \Stripe\Stripe::setApiKey('sk_test_3J1CbdPGPwD6vajiW7yaFCob00HXjqPbb5');
@@ -20,12 +23,15 @@ $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
 $first_name = $POST['first_name'];
 $last_name = $POST['last_name'];
 $email = $POST['client_email'];
+$phonenum = $POST['client_phone'];
 $token = $POST['stripeToken'];
 
 //Datos de Pago
 $costo_traslado = $POST['costo_traslado'];
 $costo_reserva = $POST['costo_reserva'];
 $pago_pendiente = $POST['pago_pendiente'];
+
+$precioReservaSt = $costo_reserva * 100;
 
 //Datos de Traslado
 $origen_traslado = $POST['origen'];
@@ -58,11 +64,13 @@ $customer = \Stripe\Customer::create([
 
 
 $charge = \Stripe\Charge::create([
-    "amount" => $precioReserva,
+    "amount" => $precioReservaSt, 
     "currency" => "mxn",
     "description" => "Booking Reservation",
     "customer" => $customer->id
-]);
+]/*,[
+    'idempotency_key' => 'Dn48Y90d2C62pTpVotsU'
+]*/);
 
 
 
@@ -75,14 +83,49 @@ $customerData = [
     'amount' => $charge->amount
 ];
 
-
-
 //Instancias Customer
 $customer = new Customer();
 
 
 //Agregar Customer a DB //***** */
 $customer->addCustomer($customerData); 
+
+
+
+
+
+//Transaction Data
+$transactionData = [
+    'id' => $charge->customer,
+    'nombre' => $first_name,
+    'apellido' => $last_name,
+    'email' => $email,
+    'telefono' => $phonenum,
+    'costo_traslado' => $costo_traslado,
+    //Se hace referencia al costo_reserva ya que el amount está en formato de la API con dos ceros extra el costo_reserva ya está procesado por tiers.php y es el valor del input del checkout
+    'costo_reserva' => $costo_reserva,
+    'pago_efectivo' => $pago_pendiente,
+    'origen' => $origen_traslado,
+    'destino' => $destino_traslado,
+    'fecha' => $fecha_traslado,
+    'hora' => $hora_traslado,
+    'num_pasajeros' => $num_pasajeros,
+    'nombres_pasajeros' => $nombre_pasajeros,
+    'asientos_bebe' => $asientos_bebe,
+    'paradas' => $paradas_intermedias,
+    'detalles_adicionales' => $detalles_adicionales
+];
+
+//Instancias Transaction
+$transaction = new Transaction();
+
+
+//Agregar Transaction a DB //***** */
+$transaction->addTransaction($transactionData); 
+
+
+
+
 
 
 ///////Envio de Mail a cliente///////
@@ -92,9 +135,20 @@ $subject = "Reserva de traslado";
 
 $subject2 = "Nueva reserva de traslado";
 
-$template_file = "./template.php";
+$currentLang = $_SESSION['lang'];
 
-$template_file2 = "./template2.php";
+
+if($currentLang == 'es'){
+    $template_file = "emailTemplates/template.php";
+}else if ($currentLang == 'en'){
+    $template_file = "emailTemplates/templateeng.php";
+}else if ($currentLang == 'fr'){
+    $template_file = "emailTemplates/templatefr.php";
+}else if ($currentLang == 'de'){
+    $template_file = "emailTemplates/templatede.php";
+}
+
+$template_admin = "emailTemplates/template2.php";
 
 require_once "PHPMailer/PHPMailer.php";
 require_once "PHPMailer/SMTP.php";
@@ -135,16 +189,16 @@ $body = str_replace('$detallesAdicionales', $detalles_adicionales, $body);
 
 //SMTP Settings
 $mail->isSMTP();
-$mail->Host = "smtp.gmail.com";
-$mail->SMTPAuth = true;
-$mail->Username = "email@email.com";
-$mail->Password = 'pss';
-$mail->Port = 465; //587
-$mail->SMTPSecure = "ssl"; //tls
+$mail->Host = 'localhost';
+$mail->SMTPAuth = false;
+$mail->Username = "info@cancuntravelers.com";
+$mail->Password = 'Marol1234';
+$mail->Port = 25; //587
+$mail->SMTPSecure = 'none'; //tls
 
 //Email Settings
 $mail->isHTML(true);
-$mail->setFrom("email@email.com");
+$mail->setFrom("info@cancuntravelers.com");
 $mail->addAddress($email, $first_name);
 $mail->Subject = $subject;
 $mail->Body = $body;
@@ -166,8 +220,8 @@ $mail = new PHPMailer();
 
 
 //Mail template
-if(file_exists($template_file2))
-    $body2 = file_get_contents($template_file2); 
+if(file_exists($template_admin))
+    $body2 = file_get_contents($template_admin); 
 else
     die("Unable to locate the template file");
     
@@ -198,17 +252,17 @@ $body2 = str_replace('$detallesAdicionales', $detalles_adicionales, $body2);
     
 //SMTP Settings
 $mail->isSMTP();
-$mail->Host = "smtp.gmail.com";
-$mail->SMTPAuth = true;
-$mail->Username = "email@email.com";
-$mail->Password = 'pss';
-$mail->Port = 465; //587
-$mail->SMTPSecure = "ssl"; //tls
+$mail->Host = 'localhost';
+$mail->SMTPAuth = false;
+$mail->Username = "info@cancuntravelers.com";
+$mail->Password = 'Marol1234';
+$mail->Port = 25; //587
+$mail->SMTPSecure = 'none'; //tls
     
 //Email Settings
 $mail->isHTML(true);
-$mail->setFrom("email@email.com");
-$mail->addAddress("email@email.com");
+$mail->setFrom("info@cancuntravelers.com");
+$mail->addAddress("info@cancuntravelers.com");
 $mail->Subject = $subject2;
 $mail->Body = $body2;
     
@@ -222,5 +276,9 @@ if ($mail->send()) {
 
 ///////Fin de Mail a admin///////
 
+
+///////Calendar API/////////////
+
+
 //Redirigir a los clientes a Success Page cuando pase su pago
-header('Location: success.php?tid='.$charge->id.'&product='.$charge->description.'&email='.$charge->receipt_email);
+header('Location: success.php?tid='.$charge->id.'&product='.$charge->description);

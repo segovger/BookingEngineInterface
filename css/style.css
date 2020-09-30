@@ -39,6 +39,14 @@
     font-size: 0.8em;
 }
 
+.field-margin{
+    margin-bottom: 2.75rem;
+}
+
+.validation-notification{
+    display: none;
+}
+
 @media screen and (max-width: 760px){
     .desktop-only{
         display: none;;
@@ -186,10 +194,12 @@ footer a{
 
 .panel-white{
     background: white;
+    padding: 40px; 
+    text-align: left !important;
 }
 
 .overlay{
-    height: 600px;
+    height: 100%;
     position: absolute;
     background: white;
     opacity: 0.45;
@@ -264,6 +274,10 @@ footer a{
 .contact-img{
     background-image: url('../img/markus-winkler-3vlGNkDep4E-unsplash.jpg');
     background-size: cover;
+}
+
+.footer {
+    background-color: white !important;
 }
 
 .footer-social-media li{

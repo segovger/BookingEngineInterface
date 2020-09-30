@@ -1,53 +1,10 @@
-//Datos de horario retrieved de fecha.js
-
-document.getElementById('horarioRecordatorio').style.display = "none";
-document.getElementById('horarioActual').style.display = "none";
-
-var op = document.getElementById("horario").getElementsByTagName("option");
-var difHra = horaActual + 12;
-var difHraSig = (horaActual + 12) - 24;
 
 
+var theButton = document.getElementById('checkoutBtn');
 
-//Validacion Día y Hora (Tiene que ser mayor a 12hrs)
-if (fechaReserva == diaActual && horaActual >= 12){
-  document.getElementById('horarioRecordatorio').style.display = "block";
-  document.getElementById('horarioActual').style.display = "block";
-  //Modal Msg
-  document.querySelector('.modal').style.display = "block";
-}else if(fechaReserva == diaActual && horaActual < 12){
-  document.getElementById('horarioRecordatorio').style.display = "block";
-  document.getElementById('horarioActual').style.display = "block";
-  h = horaActual;
-  for (; h < difHra; h++) {
-       op[h].disabled = true;
-  }
-
-  i = 0;
-  for(; i < horaActual; i++){
-      op[i].disabled = true;
-  }
-}
-else{
-  console.log("Sin Modal");
-}
-
-var horaDropdown = document.getElementById('horario');
-var horaSeleccionada = horaDropdown.options[horaDropdown.selectedIndex].value;
-
-console.log('Dif hra día siguiente: ' + difHraSig);
-
-
-  if(fechaReserva == diaManana && horaActual >= 12){
-    document.getElementById('horarioRecordatorio').style.display = "block";
-    document.getElementById('horarioActual').style.display = "block";
-    for (i = 0; i < difHraSig + 1; i++) {
-      op[i].disabled = true;
-    }
-  }else{
-    console.log('Más de 12 hrs de anticipación');
-  }
-
+theButton.addEventListener('click', function(){
+  validateForm();
+});
 
 
 //Si parte de Cancun y su orgen es el aeropuerto, pregunta no. de vuelo y aerolinea. Si no, no.
@@ -56,16 +13,16 @@ function origenCancun(){
 if(document.getElementById('origenEnAeropuerto').checked) { 
     document.getElementById('direccionOrigen').style.display = "none";
     document.getElementById('datosVuelo').style.display = "block";
-    document.paymentForm.direccion_origen.value = "Aeropuerto Cancun";
+    document.paymentForm.direccion_origen.value = "Aeropuerto Cancún";
     //Validar que los datos estén ingresados en la sig. funcion
-    //validAeropuerto();
+    validAeropuerto();
   
 }else if(document.getElementById('origenNoAeropuerto').checked){
     document.getElementById('datosVuelo').style.display = "none";
     document.getElementById('direccionOrigen').style.display = "block";
-    document.paymentForm.direccion_origen.value = ""
-    document.paymentForm.num_vuelo.value = ""
-    document.paymentForm.aerolinea.value = ""
+    document.paymentForm.direccion_origen.value = "";
+    document.paymentForm.num_vuelo.value = "";
+    document.paymentForm.aerolinea.value = "";
     }else{
         return false;
     }
@@ -77,7 +34,7 @@ function validAeropuerto(){
   //Numero de vuelo
   if (document.paymentForm.num_vuelo.value == ""){
   document.paymentForm.num_vuelo.focus();
-  document.getElementById('numVueloValidator').innerHTML ="Confirmar número de vuelo antes"
+  document.getElementById('numVueloValidator').classList.remove("validation-notification");
   event.preventDefault()
   return false;
   }
@@ -85,7 +42,7 @@ function validAeropuerto(){
   //Aerolinea
   if (document.paymentForm.aerolinea.value == ""){
   document.paymentForm.aerolinea.focus();
-  document.getElementById('aerolineaValidator').innerHTML ="Confirmar nombre de aerolinea antes"
+  document.getElementById('aerolineaValidator').classList.remove("validation-notification");
   event.preventDefault()
   return false;       
   }
@@ -93,13 +50,10 @@ function validAeropuerto(){
 
 function validateForm() {
 
-  //Disable el boton para previnir double submissions
-  //document.getElementById('checkoutBtn').disabled = true;
-
   //Validacion origen
   if (document.paymentForm.origen.value == "") {
   document.paymentForm.origen.focus();
-  document.getElementById('origenValidator').innerHTML ="Punto de origen"
+  document.getElementById('origenValidator').classList.remove("validation-notification");
   event.preventDefault();
   return false;
   }
@@ -107,7 +61,7 @@ function validateForm() {
   //Validacion destino
   if (document.paymentForm.destino.value == "") {
   document.paymentForm.destino.focus();
-  document.getElementById('destinoValidator').innerHTML ="Punto de destino"
+  document.getElementById('destinoValidator').classList.remove("validation-notification");
   event.preventDefault();
   return false;
   }
@@ -115,23 +69,27 @@ function validateForm() {
   //Validacion fecha
   if (document.paymentForm.fecha.value == "") {
   document.paymentForm.fecha.focus();
-  document.getElementById('fechaValidator').innerHTML ="Fecha de viaje requerida"
+  document.getElementById('fechaValidator').classList.remove("validation-notification");
   event.preventDefault();
   return false;
   }
 
 
   //Validacion hora
-  if (document.paymentForm.horario.value == "Selecciona el horario"){
+  if (document.paymentForm.horario.value == "0"){
   document.paymentForm.horario.focus();
-  document.getElementById('horarioValidator').innerHTML ="Horario requerido"
+  document.getElementById('horarioValidator').classList.remove("validation-notification");
+  //Modal Msg
+  //document.getElementById('modalHoraViaje').style.display = "block";
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   }
 
   //Si el destino es Cancun, esto valida que el radio no esté vacío
   
-  if (document.paymentForm.origen.value == "Cancun") {
+  if (document.paymentForm.origen.value == "Cancún") {
     //Radio 1
     var radio1 = false;
     var llegadaAirport = document.paymentForm.origen_aeropuerto;
@@ -147,9 +105,12 @@ function validateForm() {
       console.log("[Debugging]Validacion Radio 1 completa");
       //document.paymentForm.direccion_origen.value = "Aeropuerto Cancun"
       }else{
-        alert("[Debugging]Selecciona una opcion: Radio 1"); //Debugging [Borrar después] (Chance agregar modal msg)
+        //Modal Msg
+        //document.getElementById('modalRadio1').style.display = "block";
         event.preventDefault()
-        document.getElementById('radio1Validator').innerHTML ="Especificar punto de partida";
+        document.getElementById('radio1Validator').classList.remove("validation-notification");
+        //Re-activar botón
+        theButton.disabled = false;
     
         return false;
     }
@@ -159,30 +120,44 @@ function validateForm() {
   if (document.paymentForm.num_pasajeros.value == ""){
   document.paymentForm.num_pasajeros.focus();
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   }
 
   //Nombres de Pasajeros
   if (document.paymentForm.nombre_pasajeros.value == ""){
   document.paymentForm.nombre_pasajeros.focus();
-  document.getElementById('nombresValidator').innerHTML ="Nombres de pasajeros"
+  document.getElementById('nombresValidator').classList.remove("validation-notification");;
+  //Modal Msg
+  //document.getElementById('modalNombrePasajeros').style.display = "block";
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   }
 
   //Dirección exacta de origen
   if (document.paymentForm.direccion_origen.value == ""){
   document.paymentForm.direccion_origen.focus();
-  document.getElementById('dirOrigenValidator').innerHTML ="Dirección de origen"
+  document.getElementById('dirOrigenValidator').classList.remove("validation-notification");
+  //Modal Msg
+  //document.getElementById('modalDireccionOrigen').style.display = "block";
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   }
 
   //Dirección exacta de destino
   if (document.paymentForm.direccion_destino.value == ""){
   document.paymentForm.direccion_destino.focus();
-  document.getElementById('dirDestinoValidator').innerHTML ="Dirección de destino"
+  document.getElementById('dirDestinoValidator').classList.remove("validation-notification");
+  //Modal Msg
+  //document.getElementById('modalDireccionDestino').style.display = "block";
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   }
 
@@ -200,9 +175,12 @@ function validateForm() {
   if(radio2){
     console.log("[Debugging]Validacion Radio 2 completa");
   }else{
-    alert("[Debugging]Selecciona una opcion: Radio 2"); //Debugging [Borrar después] (Chance agregar modal msg)
+    //Modal Msg
+    //document.getElementById('modalRadio2').style.display = "block";
     event.preventDefault()
-    document.getElementById('radio2Validator').innerHTML ="Seleccionar una opcion";
+    document.getElementById('radio2Validator').classList.remove("validation-notification");
+    //Re-activar botón
+    theButton.disabled = false;
 
     return false;
   }
@@ -221,9 +199,12 @@ function validateForm() {
   if(radio3){
     console.log("[Debugging]Validacion Radio 3 completa");
   }else{
-    alert("[Debugging]Selecciona una opcion: Radio 3"); //Debugging [Borrar después] (Chance agregar modal msg)
+    //Modal Msg
+    //document.getElementById('modalRadio3').style.display = "block";
     event.preventDefault()
-    document.getElementById('radio3Validator').innerHTML ="Especificar punto de partida";
+    document.getElementById('radio3Validator').classList.remove("validation-notification");
+    //Re-activar botón
+    theButton.disabled = false;
 
     return false;
   }
@@ -231,39 +212,44 @@ function validateForm() {
   //Validacion nombre
   if (document.paymentForm.first_name.value == "") {
   document.paymentForm.first_name.focus();
-  document.getElementById('nameValidator').innerHTML ="Nombre requerido"
+  document.getElementById('nameValidator').classList.remove("validation-notification");
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   }
 
   //Validacion apellido
   if (document.paymentForm.last_name.value == "") {
   document.paymentForm.last_name.focus();
-  document.getElementById('lastnameValidator').innerHTML ="Apellido requerido"
+  document.getElementById('lastnameValidator').classList.remove("validation-notification");
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   } 
 
   //Validacion email
   if (document.paymentForm.client_email.value == "") {
   document.paymentForm.client_email.focus();
-  document.getElementById('emailValidator').innerHTML ="Email requerido"
+  document.getElementById('emailValidator').classList.remove("validation-notification");
   event.preventDefault();
+  //Re-activar botón
+  theButton.disabled = false;
   return false;
   }
 
   //Validacion phone
  var numTel = /^\d{10}$/;
  if(document.paymentForm.client_phone.value.match(numTel)){
-   alert("Numero correcto");
    return true;
    }
    else
    {
-   alert("Insertar numero de telefono");
-   document.getElementById('phoneValidator').innerHTML ="Telefono requerido"
+   document.getElementById('phoneValidator').classList.remove("validation-notification");
    event.preventDefault();
-
+  //Re-activar botón
+  theButton.disabled = false;
    return false;
  }
 
@@ -274,16 +260,40 @@ function sillasBebe(){
 
   if(document.getElementById('conAsientoBebe').checked) { 
       document.getElementById('numSillasBebe').style.display = "block";
-      document.getElementById('asientosValidator').innerHTML ="Indique el numero de asientos";
+      document.getElementById('asientosValidator').classList.remove("validation-notification");
       document.paymentForm.asientos_bebe.value = 1;
       return false;
   }
 
   if (document.getElementById('sinAsientoBebe').checked){
-      document.getElementById('numSillasBebe').style.display = "none";
+      document.getElementById('numSillasBebe').classList.remove("validation-notification");
       document.paymentForm.asientos_bebe.value = 0;
       return false;
   }
-
 }
+
+
+//Form Btn
+/*
+var theButton = document.getElementById('checkoutBtn');
+
+//Turn Btn off 
+
+var theButton = document.getElementById('checkoutBtn');
+/*
+theButton.addEventListener('click', function(){
+  validateForm();
+});
+*/
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,9 +1,88 @@
-<?php include 'header.php'; ?>
+<?php 
+
+include 'header.php'; 
+include 'lang.php';
+
+?>
 
 <!DOCTYPE html>
 <html lang="es">
 
 <body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="index.php">
+      <img src="img/Logo Cancun Travelers.svg" width="112" height="28">
+    </a>
+            
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+            
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+    </div>
+            
+    <div class="navbar-end uppercase">
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <?php echo $lang['language'] ?>
+          </a>
+              
+          <div class="navbar-dropdown">
+            <a href="index.php?lang=es" class="navbar-item">
+              <?php echo $lang['lang_es'] ?>
+            </a>
+            <a href="index.php?lang=en"  href="en/index.php" class="navbar-item">
+              <?php echo $lang['lang_en'] ?>
+            </a>
+            <a href="index.php?lang=de" class="navbar-item">
+              <?php echo $lang['lang_de'] ?>
+            </a>
+            <a href="index.php?lang=fr" class="navbar-item">
+              <?php echo $lang['lang_fr'] ?>
+            </a>
+          </div>
+      </div>
+      <a href="nosotros.php" class="navbar-item">
+        <?php echo $lang['nosotros'] ?>
+      </a>
+      <a href="contacto.php" class="navbar-item">
+        <?php echo $lang['contacto'] ?>
+      </a>
+      <a href="grupos.php" class="navbar-item">
+        <?php echo $lang['grupos'] ?>
+      </a>
+      <a href="covid.php" class="navbar-item">
+        <?php echo $lang['covid'] ?>
+      </a>
+      <a href="faq.php" class="navbar-item">
+        <?php echo $lang['FAQs'] ?>
+      </a>
+      <a href="booking.php" class="navbar-item">
+        <?php echo $lang['booking'] ?>
+      </a>
+      <a href="traslados.php" class="navbar-item">
+        <?php echo $lang['traslados'] ?>
+      </a>
+        <?php if( !empty($user) ): ?>
+        <a class="navbar-item" href="admin.php">&nbsp;<span class="tag is-link is-medium"><span style="font-size: 0.8em">Admin panel</span></span></a>
+        <?php else: ?>
+        <?php endif; ?>
+      </a>
+      </a>
+        <?php if( !empty($user) ): ?>
+        <a class="navbar-item" href="logout.php">&nbsp;Cerrar sesión</a>
+        <?php else: ?>
+        <?php endif; ?>
+      </a>
+    </div>
+  </div>
+</nav>
 
 
 <div class="spacer"></div>
@@ -15,16 +94,19 @@
             <div class="columns is-vcentered">
                 <div class="column is-6">
                     <h1 class="title is-2">
-                        Servicio de excelencia
+                      <?php echo $lang['nosotros_title'] ?>
                     </h1>
-                    <h2 class="subtitle is-6 pt">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem pariatur architecto odio beatae dolor rerum esse non.
-                    </h2>
+                    <p class="subtitle is-6 pt">
+                      <?php echo $lang['nosotros_desc'] ?>
+                    </p>
+                    <div class="buttons">
+                      <a href="booking.php"><button class="button btn-green"><?php echo $lang['nosotros_cta__button'] ?></button></a>
+                    </div>
                     <div class="small-spacer"></div>
                 </div>
                 <div class="column is-5 is-offset-1">
-                    <figure class="image is-4by3">
-                        <img src="https://picsum.photos/800/600/?random" alt="Description">
+                    <figure class="image is-5by3">
+                        <img src="./img/CT-2.jpg" alt="Description">
                     </figure>
                 </div>
             </div>
@@ -38,7 +120,7 @@
     <section class="process">
       <div class="container has-text-centered">
         <h1 class="title">
-          Viaja en 3 simples pasos
+          <?php echo $lang['icons_title'] ?>
         </h1>
         <div class="small-spacer"></div>
 
@@ -50,13 +132,13 @@
             <div class="card home-card">
               <div class="card-image">
                 <figure class="image icon-container is-96x96">
-                  <img src="img/Process-icon-1.svg" alt="Placeholder image">
+                  <img src="img/Process-icon-6.svg" alt="Placeholder image">
                 </figure>
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="title is-5 has-text-centered">1. Elije tu destino</p>
+                    <p class="title is-5 has-text-centered"><?php echo $lang['msg_1'] ?></p>
                   </div>
                 </div>
               </div>
@@ -68,13 +150,13 @@
             <div class="card home-card">
               <div class="card-image">
                 <figure class="image icon-container is-96x96">
-                  <img src="img/Process-icon-2.svg" alt="Placeholder image">
+                  <img src="img/Process-icon-5.svg" alt="Placeholder image">
                 </figure>
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="title is-5 has-text-centered">2. Registra tu traslado y paga tu reservación</p>
+                    <p class="title is-6 has-text-centered"><?php echo $lang['msg_2'] ?></p>
                   </div>
                 </div>
               </div>
@@ -92,7 +174,25 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="title is-5 has-text-centered">3. Una vez en tu punto de partida, paga el resto de tu traslado</p>
+                    <p class="title is-5 has-text-centered"><?php echo $lang['msg_3'] ?></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--STEP 4-->
+          <div class="column">
+            <div class="card home-card">
+              <div class="card-image">
+                <figure class="image icon-container is-96x96">
+                  <img src="img/Process-icon-7.svg" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-5 has-text-centered"><?php echo $lang['msg_4'] ?></p>
                   </div>
                 </div>
               </div>
@@ -107,10 +207,13 @@
 
     <!--PROPUESTA DE VALOR DE EMPRESA 2-->
 
+    <!--
+
     <div class="hero-body">
       <div class="container">
           <div class="columns is-vcentered">
               <div class="column is-6">
+              
                 <div class="slider">
                   <div class="slide_viewer">
                     <div class="slide_group">
@@ -158,18 +261,39 @@
 
               <div class="column is-offset-1 is-5">
                 <h1 class="title is-2">
-                    Servicio de excelencia
+                  <?php echo $lang['nosotros_cta_title'] ?>
                 </h1>
                 <h2 class="subtitle is-6 pt">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem pariatur architecto odio beatae dolor rerum esse non.
+                  <?php echo $lang['nosotros_cta_desc'] ?>
                 </h2>
-                <div class="buttons">
-                  <a href="booking.php"><button class="button btn-red">Reserva tu traslado</button></a>
-                </div>
             </div>
           </div>
       </div>
   </div>
+
+  -->
+
+
+  <div class="hero-body">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-6">
+                    <figure class="image is-4by3">
+                        <img src="./img/CT-1.jpg" alt="Description">
+                    </figure>
+                </div>
+                <div class="column is-5 is-offset-1">
+                <h1 class="title is-2">
+                  <?php echo $lang['nosotros_cta_title'] ?>
+                </h1>
+                <h2 class="subtitle is-6 pt">
+                  <?php echo $lang['nosotros_cta_desc'] ?>
+                </h2>
+                    <div class="small-spacer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <div class="spacer"></div>
 

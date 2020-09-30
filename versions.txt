@@ -1,0 +1,11 @@
+Server version: Apache/2.4.33 (Unix) [Production localhost]
+
+PHP version: 7.2.1
+
+Server: Localhost via UNIX socket
+Server type: MySQL
+Server version: 5.6.38 - MySQL Community Server (GPL)
+Protocol version: 10
+
+Composer version 1.6.5 2018-05-04 11:44:59
+
