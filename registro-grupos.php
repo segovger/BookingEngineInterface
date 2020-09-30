@@ -96,7 +96,7 @@ $mail->SMTPDebug = 0; //$mail->isSMTP();
 $mail->Host = 'localhost'; //"smtp.gmail.com";
 $mail->SMTPAuth = false; //true;
 $mail->Username = "info@cancuntravelers.com";
-$mail->Password = 'Marol1234';
+$mail->Password = 'Pss';
 $mail->Port = 25; //465; //587
 $mail->SMTPSecure = 'none'; //"ssl"; //tls
     

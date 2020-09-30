@@ -192,7 +192,7 @@ $mail->isSMTP();
 $mail->Host = 'localhost';
 $mail->SMTPAuth = false;
 $mail->Username = "info@cancuntravelers.com";
-$mail->Password = 'Marol1234';
+$mail->Password = 'Pss';
 $mail->Port = 25; //587
 $mail->SMTPSecure = 'none'; //tls
 
@@ -255,7 +255,7 @@ $mail->isSMTP();
 $mail->Host = 'localhost';
 $mail->SMTPAuth = false;
 $mail->Username = "info@cancuntravelers.com";
-$mail->Password = 'Marol1234';
+$mail->Password = 'Pss';
 $mail->Port = 25; //587
 $mail->SMTPSecure = 'none'; //tls
     
